@@ -1,4 +1,4 @@
-package com.example.spotifree.ui.login
+package com.example.househub.ui.login
 
 /**
  * User details post authentication that is exposed to the UI

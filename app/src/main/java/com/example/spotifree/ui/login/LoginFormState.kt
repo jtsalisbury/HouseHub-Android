@@ -1,4 +1,4 @@
-package com.example.spotifree.ui.login
+package com.example.househub.ui.login
 
 /**
  * Data validation state of the login form.

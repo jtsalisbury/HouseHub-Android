@@ -1,4 +1,4 @@
-package com.example.spotifree.ui.login
+package com.example.househub.ui.login
 
 import android.app.Activity
 import android.arch.lifecycle.Observer
@@ -15,7 +15,7 @@ import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
 
-import com.example.spotifree.R
+import com.example.househub.R
 
 class LoginActivity : AppCompatActivity() {
 

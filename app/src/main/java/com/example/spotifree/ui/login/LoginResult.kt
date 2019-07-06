@@ -1,4 +1,4 @@
-package com.example.spotifree.ui.login
+package com.example.househub.ui.login
 
 /**
  * Authentication result : success (user details) or error message.

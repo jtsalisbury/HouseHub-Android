@@ -1,6 +1,6 @@
-package com.example.spotifree.data
+package com.example.househub.data
 
-import com.example.spotifree.data.model.LoggedInUser
+import com.example.househub.data.model.LoggedInUser
 import java.io.IOException
 
 /**
