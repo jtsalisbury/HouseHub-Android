@@ -1,4 +1,4 @@
-package com.example.spotifree
+package com.example.househub
 
 import org.junit.Test
 

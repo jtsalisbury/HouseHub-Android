@@ -1,13 +1,13 @@
-package com.example.spotifree.ui.login
+package com.example.househub.ui.login
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import android.util.Patterns
-import com.example.spotifree.data.LoginRepository
-import com.example.spotifree.data.Result
+import com.example.househub.data.LoginRepository
+import com.example.househub.data.Result
 
-import com.example.spotifree.R
+import com.example.househub.R
 
 class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel() {
 

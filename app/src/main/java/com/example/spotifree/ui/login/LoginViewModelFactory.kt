@@ -1,9 +1,9 @@
-package com.example.spotifree.ui.login
+package com.example.househub.ui.login
 
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
-import com.example.spotifree.data.LoginDataSource
-import com.example.spotifree.data.LoginRepository
+import com.example.househub.data.LoginDataSource
+import com.example.househub.data.LoginRepository
 
 /**
  * ViewModel provider factory to instantiate LoginViewModel.

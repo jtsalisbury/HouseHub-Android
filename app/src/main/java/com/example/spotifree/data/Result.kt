@@ -1,4 +1,4 @@
-package com.example.spotifree.data
+package com.example.househub.data
 
 /**
  * A generic class that holds a value with its loading status.
