@@ -1,6 +1,6 @@
 package com.example.househub.data.model
 
-import com.example.househub.data.JWT
+import com.example.househub.JWT
 import junit.framework.Assert.assertEquals
 import org.junit.Test
 

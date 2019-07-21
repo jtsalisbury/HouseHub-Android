@@ -1,4 +1,4 @@
-package com.example.househub.data
+package com.example.househub
 
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -35,9 +35,7 @@ class JWT {
         val cipher = Cipher.getInstance(payloadCipherAlgo)
         cipher.init(Cipher.ENCRYPT_MODE, secret)
 
-        val encrypted = Base64.getEncoder().encodeToString(cipher.doFinal(dataBytes))
-
-        return encrypted
+        return Base64.getEncoder().encodeToString(cipher.doFinal(dataBytes))
     }
 
     // Decrypts a string using AES-128-ECB decryption
@@ -49,9 +47,7 @@ class JWT {
         val cipher = Cipher.getInstance(payloadCipherAlgo)
         cipher.init(Cipher.DECRYPT_MODE, secret)
 
-        val decrypted = String(cipher.doFinal(dataBytes))
-
-        return decrypted
+        return String(cipher.doFinal(dataBytes))
     }
 
     // Helper function to turn a byte array into a hex string
@@ -77,8 +73,8 @@ class JWT {
     }
 
     // Generates the token given a specific payload
-    fun generateToken(payload: Map<String, String>): String {
-        val gson: Gson = Gson()
+    fun generateToken(payload: Map<String, Any>): String {
+        val gson = Gson()
 
         val header = mapOf("typ" to "JWT", "alg" to "HS256")
 
@@ -90,9 +86,7 @@ class JWT {
 
         val sign = encode64(hashedSign)
 
-        val token = headerEnc + "." + payloadEncrypted + "." + sign
-
-        return token
+        return headerEnc + "." + payloadEncrypted + "." + sign
     }
 
     // Verifies a token as valid
@@ -114,14 +108,14 @@ class JWT {
     }
 
     // Gets the payload from a token
-    fun decodePayload(token: String): Map<String, String> {
+    fun decodePayload(token: String): Map<String, Any> {
         val parts: Array<String> = token.split(".").toTypedArray()
 
         if (parts.size < 3) {
             return mapOf("" to "")
         }
 
-        val gson: Gson = Gson()
+        val gson = Gson()
 
         val payload = parts[1]
         val decrpted = decrypt(payload)
