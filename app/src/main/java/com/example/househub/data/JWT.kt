@@ -8,100 +8,126 @@ import javax.crypto.Mac
 import javax.crypto.spec.SecretKeySpec
 
 class JWT {
+
     // This info would be private in a real release
-    private var key = "17EK11tAAV9JIR3d/8wqo7sLBwzqUQWC";
-    private var signAlgo = "HmacSHA256";
+    private var key = "17EK11tAAV9JIR3d/8wqo7sLBwzqUQWC"
+    private var signAlgo = "HmacSHA256"
 
-    private var payloadSecret = "dS2wyKlp3oqBUkZSZ7FIncRV5LSs9wiH";
-    private var payloadCipherAlgo = "AES-128-CBC";
+    private var payloadSecret = "W91UeXVpJlDv4Ivz"
+    private var payloadCipherAlgo = "AES/ECB/PKCS5Padding"
 
-    public fun encode64 (data: String): String {
-        return Base64.getUrlEncoder().encodeToString(data.toByteArray());
+    // Helper function for encoding strings to base64
+    fun encode64 (data: String): String {
+        return Base64.getEncoder().encodeToString(data.toByteArray())
     }
 
-    public fun decode64 (data: String): String {
-        return String(Base64.getUrlDecoder().decode(data));
+    // Helper function for decoding strings from base64
+    fun decode64 (data: String): String {
+        return String(Base64.getDecoder().decode(data))
     }
 
+    // Encrypts a string using AES-128-ECB encryption
     fun encrypt(data: String): String {
-        val cipher = Cipher.getInstance("AES/CBC/PKCS5Padding")
-        val keySpec = SecretKeySpec(payloadSecret.toByteArray(), "AES")
-        cipher.init(Cipher.ENCRYPT_MODE, keySpec)
+        val secret = SecretKeySpec(payloadSecret.toByteArray(), "AES")
 
-        val ciphertext = cipher.doFinal(data.toByteArray());
+        val dataBytes = data.toByteArray()
 
-        return Base64.getEncoder().encodeToString(ciphertext);
+        val cipher = Cipher.getInstance(payloadCipherAlgo)
+        cipher.init(Cipher.ENCRYPT_MODE, secret)
+
+        val encrypted = Base64.getEncoder().encodeToString(cipher.doFinal(dataBytes))
+
+        return encrypted
     }
 
-    public fun decrypt(data: String): String  {
-        val rawKey : ByteArray = key.toByteArray();
+    // Decrypts a string using AES-128-ECB decryption
+    fun decrypt(data: String): String  {
+        val dataBytes = Base64.getDecoder().decode(data.toByteArray())
 
-        val skeySpec = SecretKeySpec(rawKey, "AES")
-        val cipher = Cipher.getInstance("AES/CBC/PKCS5Padding")
-        cipher.init(Cipher.DECRYPT_MODE, skeySpec)
-        val byteArray = cipher.doFinal(data.toByteArray())
+        val secret = SecretKeySpec(payloadSecret.toByteArray(), "AES")
 
-        return byteArray.toString()
+        val cipher = Cipher.getInstance(payloadCipherAlgo)
+        cipher.init(Cipher.DECRYPT_MODE, secret)
+
+        val decrypted = String(cipher.doFinal(dataBytes))
+
+        return decrypted
     }
 
-    public fun hash(data: String): ByteArray = try {
-       Mac.getInstance(signAlgo).run {
-           init(SecretKeySpec(key.toByteArray(), signAlgo))
-           doFinal(data.toByteArray());
-       }
+    // Helper function to turn a byte array into a hex string
+    private fun hex(data: ByteArray): String = data.fold(StringBuilder()) { acc, next ->
+        acc.append(String.format("%02x", next))
+    }.toString().toLowerCase()
+
+    // Computes the hash of a byte array
+    private fun realHash(data: ByteArray): ByteArray = try {
+        Mac.getInstance(signAlgo).run {
+            init(SecretKeySpec(key.toByteArray(), signAlgo))
+            doFinal(data)
+        }
     } catch (e: Exception) {
-        throw RuntimeException("Could not run HMAC SHA256", e);
+        throw RuntimeException("Could not run HMAC SHA256", e)
     }
 
-    // generateToken(*payload)
-    public fun generateToken(payload: Map<String, String>) {
-        var gson: Gson = Gson();
+    // Helper function to computer the hash of a string
+    fun hash(data: String): String {
+        val res = realHash(data.toByteArray())
 
-        var header = mapOf("typ" to "JWT", "alg" to "HS256");
-
-        var header_enc = encode64(gson.toJson(header));
-        var payload_enc = encode64(gson.toJson(payload));
-
-
-        var payload_encrypted = encrypt(payload_enc);
-        var hashedSign = String(hash(header_enc + payload_encrypted));
-
-        var sign = encode64(hashedSign);
-
-        var token = header_enc + "." + payload_encrypted + "." + sign;
+        return hex(res)
     }
 
-    public fun verifyToken(token: String): Boolean {
-        val parts: Array<String> = token.split(".").toTypedArray();
+    // Generates the token given a specific payload
+    fun generateToken(payload: Map<String, String>): String {
+        val gson: Gson = Gson()
+
+        val header = mapOf("typ" to "JWT", "alg" to "HS256")
+
+        val headerEnc = encode64(gson.toJson(header))
+        val payloadEnc = encode64(gson.toJson(payload))
+
+        val payloadEncrypted = encrypt(payloadEnc)
+        val hashedSign = hash(headerEnc + "." + payloadEncrypted)
+
+        val sign = encode64(hashedSign)
+
+        val token = headerEnc + "." + payloadEncrypted + "." + sign
+
+        return token
+    }
+
+    // Verifies a token as valid
+    fun verifyToken(token: String): Boolean {
+        val parts: Array<String> = token.split(".").toTypedArray()
 
         if (parts.size < 3) {
-            return false;
+            return false
         }
 
-        var header = parts[0];
-        var payload = parts[1];
-        var signature = parts[2];
+        val header = parts[0]
+        val payload = parts[1]
+        val signature = parts[2]
 
-        var curSign = decode64(signature);
-        var rawSign = String(hash(header + "." + payload));
+        val curSign = decode64(signature)
+        val rawSign = hash(header + "." + payload)
 
-        return (curSign == rawSign);
+        return (curSign == rawSign)
     }
 
-    public fun decodePayload(token: String): Map<String, String> {
-        var parts: Array<String> = token.split(".").toTypedArray();
+    // Gets the payload from a token
+    fun decodePayload(token: String): Map<String, String> {
+        val parts: Array<String> = token.split(".").toTypedArray()
 
         if (parts.size < 3) {
-            return mapOf("" to "");
+            return mapOf("" to "")
         }
 
-        var gson: Gson = Gson();
+        val gson: Gson = Gson()
 
-        var payload = parts[1];
-        var decrpted = decrypt(payload);
+        val payload = parts[1]
+        val decrpted = decrypt(payload)
 
-        var m = object : TypeToken<Map<String, String>>() {}.type
+        val m = object : TypeToken<Map<String, String>>() {}.type
 
-        return gson.fromJson(decode64(decrpted), m);
+        return gson.fromJson(decode64(decrpted), m)
     }
 }
