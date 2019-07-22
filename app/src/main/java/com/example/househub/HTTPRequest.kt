@@ -21,7 +21,10 @@ class HTTPRequest(_url: String, _payload: Map<String, Any>, _callbackSuccess: (r
     fun open() {
         val jwt = JWT();
 
+        val gson = Gson()
         val token = jwt.generateToken(payload);
+
+        val tokenEncoded = gson.toJson(mapOf("token" to token))
 
         with (url.openConnection() as HttpURLConnection) {
             requestMethod = "POST"
@@ -29,7 +32,7 @@ class HTTPRequest(_url: String, _payload: Map<String, Any>, _callbackSuccess: (r
             connectTimeout = 300000
             doOutput = true
 
-            val postData: ByteArray = token.toByteArray(StandardCharsets.UTF_8)
+            val postData: ByteArray = tokenEncoded.toByteArray(StandardCharsets.UTF_8)
 
             setRequestProperty("charset", "utf-8")
             setRequestProperty("Content-lenght", postData.size.toString())
@@ -56,17 +59,14 @@ class HTTPRequest(_url: String, _payload: Map<String, Any>, _callbackSuccess: (r
                         }
                         it.close()
 
-                        val gson = Gson()
                         val responseStr = response.toString()
-
-                        res = response
 
                         val m = object : TypeToken<Map<String, *>>() {}.type
 
                         try {
-                            val obj: Map<String, Map<String, Any>> = gson.fromJson(responseStr, m)
+                            val obj: Map<String, String> = gson.fromJson(responseStr, m)
                             val msg = obj["status"]
-
+                            // deal with success or fail on the message
 
                         } catch (e: JsonParseException) {
 
