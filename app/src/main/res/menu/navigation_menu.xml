@@ -11,7 +11,7 @@
     <item
             android:id="@+id/action_my_account"
             android:title="My Account"
-            android:icon="@drawable/ic_account_circle_black_24dp"
+            android:icon="@drawable/ic_person_black_24dp"
     />
     <item
             android:id="@+id/action_logout"
