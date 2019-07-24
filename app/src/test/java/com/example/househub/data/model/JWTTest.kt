@@ -45,7 +45,7 @@ class JWTTest {
 
     @Test
     fun testGenerateToken() {
-        val jwt: JWT = JWT();
+        val jwt: JWT = JWT()
 
         val realToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.xc6B91TEdgoaYm7ZARLvGKVYWXWW4FG0Qk4ivGp2ZeY3lUMGK+r+65+EgyggDFOv.MDY1OThjN2FjZjA0NzE3OWFjODRlZDQ4MjExZWI0ZWVlNTRmOTk3NDIwODc1MjA2YjUyNDc0NjVjNjUwZGZkMQ==";
 

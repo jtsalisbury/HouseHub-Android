@@ -10,15 +10,15 @@ import java.net.HttpURLConnection
 import java.net.URL
 import java.nio.charset.StandardCharsets
 
-class HTTPRequest(_url: String, _payload: Map<String, Any>, _callbackSuccess: (result: String)->Unit, _callbackFail: (result: String)->Unit) {
+class HTTPRequest(_url: String, _payload: Map<String, Any>, _callbackSuccess: String, _callbackFail: String) {
     private val url = URL(_url)
     private val payload = _payload
-    private val callbackSuccess = _callbackSuccess
-    private val callbackFail = _callbackFail
+    private var callbackSuccess = _callbackSuccess
+    private var callbackFail = _callbackFail
     var res = ""
 
 
-    fun open() {
+    fun open(): Pair<String, String> {
         val jwt = JWT();
 
         val gson = Gson()
@@ -35,7 +35,7 @@ class HTTPRequest(_url: String, _payload: Map<String, Any>, _callbackSuccess: (r
             val postData: ByteArray = tokenEncoded.toByteArray(StandardCharsets.UTF_8)
 
             setRequestProperty("charset", "utf-8")
-            setRequestProperty("Content-lenght", postData.size.toString())
+            setRequestProperty("Content-length", postData.size.toString())
             setRequestProperty("Content-Type", "application/json")
 
             try {
@@ -46,7 +46,7 @@ class HTTPRequest(_url: String, _payload: Map<String, Any>, _callbackSuccess: (r
 
             }
 
-            if (responseCode != HttpURLConnection.HTTP_OK && responseCode != HttpURLConnection.HTTP_CREATED) {
+            if (responseCode == HttpURLConnection.HTTP_OK || responseCode == HttpURLConnection.HTTP_CREATED) {
                 try {
 
                     BufferedReader(InputStreamReader(inputStream)).use {
@@ -65,8 +65,27 @@ class HTTPRequest(_url: String, _payload: Map<String, Any>, _callbackSuccess: (r
 
                         try {
                             val obj: Map<String, String> = gson.fromJson(responseStr, m)
-                            val msg = obj["status"]
-                            // deal with success or fail on the message
+                            val result = obj["status"]
+                            val message = obj["message"]
+
+                            if(result == "error") {
+                                if(message == null) {
+                                    callbackFail = "Undefined failure."
+                                }
+                                else {
+                                    callbackFail = message
+                                }
+                            }
+
+                            if (result == "success") {
+                                if(message == null)
+                                {
+                                    callbackSuccess = "Undefined success."
+                                }
+                                else {
+                                    callbackSuccess = message
+                                }
+                            }
 
                         } catch (e: JsonParseException) {
 
@@ -81,7 +100,6 @@ class HTTPRequest(_url: String, _payload: Map<String, Any>, _callbackSuccess: (r
                 }
             }
         }
-
-
+        return Pair(callbackSuccess,callbackFail)
     }
 }
