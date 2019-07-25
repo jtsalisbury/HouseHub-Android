@@ -12,3 +12,5 @@ data class LoggedInUser(
     val createdDate: String,
     val userId: Int
 )
+
+
