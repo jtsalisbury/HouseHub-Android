@@ -1,7 +1,6 @@
 package com.example.househub.ui.login
 
 import android.app.Activity
-import android.app.ListActivity
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
@@ -17,7 +16,8 @@ import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
 import com.example.househub.R
-import com.example.househub.ui.toolbar.ToolbarActivity
+import com.example.househub.ui.account.AccountInfoActivity
+import com.example.househub.ui.listings.ListViewActivity
 
 
 
@@ -94,7 +94,7 @@ class LoginActivity : AppCompatActivity() {
                                 password.text.toString()
                             )
                             //val i = Intent("com.example.househub.ui.listings.ListActivity")
-                            val intent = Intent(context, ToolbarActivity::class.java)
+                            val intent = Intent(context, ListViewActivity::class.java)
                             startActivity(intent)
                         }).start()
                 }
@@ -106,7 +106,7 @@ class LoginActivity : AppCompatActivity() {
 
                 Thread(Runnable {
                     loginViewModel.login(email.text.toString(), password.text.toString())
-                    val intent = Intent(context, ListActivity::class.java)
+                    val intent = Intent(context, AccountInfoActivity::class.java)
                     startActivity(intent)
                 }).start()
             }

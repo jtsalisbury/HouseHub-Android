@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.example.househub">
 
-    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
             android:allowBackup="true"
@@ -12,11 +12,26 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
         <activity
-            android:name=".ui.listings.ListActivity"
-            android:label="@string/title_activity_list"
-            android:theme="@style/AppTheme">
+                android:name=".ui.account.AccountInfoActivity"
+                android:label="@string/title_activity_account_info"
+                android:parentActivityName=".ui.listings.ListViewActivity"
+                android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value="com.example.househub.ui.listings.ListViewActivity"/>
+        </activity>
+        <activity
+                android:name=".ui.listings.ListViewActivity"
+                android:label="@string/title_activity_list_view"
+                android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity
+                android:name=".ui.listings.ListActivity"
+                android:label="@string/title_activity_list"
+                android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="com.example.househub.ui.listings.ListActivity"/>
+
                 <category android:name="android.intent.category.BROWSABLE"/>
             </intent-filter>
         </activity>
@@ -30,6 +45,7 @@
                 android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
+
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
