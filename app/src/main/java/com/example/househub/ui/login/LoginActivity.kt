@@ -21,6 +21,8 @@ import com.example.househub.ui.toolbar.ToolbarActivity
 
 
 
+
+
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var loginViewModel: LoginViewModel
@@ -91,7 +93,8 @@ class LoginActivity : AppCompatActivity() {
                                 email.text.toString(),
                                 password.text.toString()
                             )
-                            val intent = Intent(context, ListActivity::class.java)
+                            //val i = Intent("com.example.househub.ui.listings.ListActivity")
+                            val intent = Intent(context, ToolbarActivity::class.java)
                             startActivity(intent)
                         }).start()
                 }
