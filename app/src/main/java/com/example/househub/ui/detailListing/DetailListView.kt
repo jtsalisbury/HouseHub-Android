@@ -19,6 +19,7 @@ class DetailListView : AppCompatActivity() {
 
     fun setFieldValues(listing: Map<String, String>) {
         // TODO: Grab images map from listing["images"] (possibly need to convert another json string)
+        // TODO: Add buttons to sides of imageview in order to be able to switch through the images array
         // set all field values!
     }
 
