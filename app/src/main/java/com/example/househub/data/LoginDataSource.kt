@@ -3,7 +3,6 @@ package com.example.househub.data
 import com.example.househub.HTTPRequest
 import com.example.househub.JWT
 import com.example.househub.data.model.LoggedInUser
-import com.google.gson.Gson
 import java.io.IOException
 
 /**
@@ -20,8 +19,9 @@ class LoginDataSource {
             val url = "http://u747950311.hostingerapp.com/househub/api/user/login.php"
             var success = ""
             var fail = ""
-            val h = HTTPRequest(url, payload, success, fail)
-            val results = h.open()
+
+            val httpRequest = HTTPRequest(url, payload, success, fail)
+            val results = httpRequest.open()
 
             success = results.first
             fail = results.second
@@ -33,6 +33,7 @@ class LoginDataSource {
             val retrievedInfo = jwt.decodePayload(success)
 
             val user = LoggedInUser(retrievedInfo["fname"].toString(), retrievedInfo["lname"].toString(), retrievedInfo["fname"].toString() + " " + retrievedInfo["lname"], retrievedInfo["email"].toString(), retrievedInfo["admin"].toString(), retrievedInfo["created"].toString(), retrievedInfo["uid"].toString().toInt())
+
             return Result.Success(user)
 
         } catch (e: Throwable) {
@@ -44,4 +45,20 @@ class LoginDataSource {
         // TODO: revoke authentication
     }
 }
+
+/*class someTask() : AsyncTask<Void, Void, String>() {
+    override fun doInBackground(vararg params: Void?): String? {
+        // ...
+    }
+
+    override fun onPreExecute() {
+        super.onPreExecute()
+        // ...
+    }
+
+    override fun onPostExecute(result: String?) {
+        super.onPostExecute(result)
+        // ...
+    }
+}*/
 

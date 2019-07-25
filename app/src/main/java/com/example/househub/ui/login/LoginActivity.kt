@@ -15,9 +15,10 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
-
 import com.example.househub.R
 import com.example.househub.ui.toolbar.ToolbarActivity
+
+
 
 class LoginActivity : AppCompatActivity() {
 
@@ -94,10 +95,18 @@ class LoginActivity : AppCompatActivity() {
 
             login.setOnClickListener {
                 loading.visibility = View.VISIBLE
-                loginViewModel.login(email.text.toString(), password.text.toString())
 
-                val intent = Intent(context, ToolbarActivity::class.java)
-                startActivity(intent)
+                Thread(Runnable {
+                    loginViewModel.login(email.text.toString(), password.text.toString())
+                    val intent = Intent(context, ToolbarActivity::class.java)
+                    startActivity(intent)
+                }).start()
+
+                /*doAsync {
+                    loginViewModel.login(email.text.toString(), password.text.toString())
+                    val intent = Intent(context, ToolbarActivity::class.java)
+                    startActivity(intent)
+                }*/
             }
         }
     }
