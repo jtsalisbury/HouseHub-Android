@@ -38,7 +38,7 @@ class LoginRepository(val dataSource: LoginDataSource) {
         }
         // User successfully logged in
         else {
-            //setLoggedInUser(result)
+            setLoggedInUser(result)
         }
 
         return result
