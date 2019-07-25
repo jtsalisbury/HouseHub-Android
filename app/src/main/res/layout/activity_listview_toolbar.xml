@@ -54,7 +54,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/imageView"
                 android:layout_marginEnd="8dp"
-                android:fontFamily="sans-serif"/>
+                android:fontFamily="@font/montserrat"/>
 
         <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
@@ -64,18 +64,21 @@
                 tools:layout_editor_absoluteX="-59dp">
 
             <EditText
-                    android:layout_width="192dp"
-                    android:layout_height="45dp"
+                    android:layout_width="191dp"
+                    android:layout_height="wrap_content"
                     android:inputType="textFilter"
                     android:hint="Search Listings..."
                     android:textColor="@color/black"
+                    android:textSize="18sp"
                     android:ems="10"
                     android:id="@+id/editText"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     android:textColorHint="@color/light_grey"
-                    android:backgroundTint="@color/colorWhite"
-                    android:layout_marginStart="8dp"/>
+                    android:backgroundTint="@null"
+                    android:fontFamily="@font/open_sans"
+                    android:layout_marginLeft="8dp"
+                    android:background="@null" android:layout_marginTop="14dp"/>
 
             <android.support.design.button.MaterialButton
                     android:text="View Listings"
@@ -85,7 +88,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/view_listings_button"
                     app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
-                    app:layout_constraintBottom_toBottomOf="parent" android:fontFamily="sans-serif"
+                    app:layout_constraintBottom_toBottomOf="parent" android:fontFamily="@font/open_sans"
                     android:textAllCaps="false" android:textSize="16sp" android:backgroundTint="@color/colorPrimaryDark"
                     app:strokeWidth="2dp" app:strokeColor="@color/colorWhite"
                     android:shadowColor="@color/colorPrimary"/>

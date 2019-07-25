@@ -1,5 +1,6 @@
 package com.example.househub.ui.account
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
@@ -9,6 +10,8 @@ import android.view.View
 import android.widget.TextView
 import com.example.househub.R
 import com.example.househub.data.model.LoggedInUser
+import com.example.househub.ui.listings.ListViewToolbarActivity
+import com.example.househub.ui.login.LoginActivity
 import kotlinx.android.synthetic.main.activity_account_info.*
 import kotlinx.android.synthetic.main.toolbar.*
 import org.jetbrains.anko.toast
@@ -53,14 +56,16 @@ class AccountInfoActivity : AppCompatActivity() {
         // Set navigation view navigation item selected listener
         account_navigation_view.setNavigationItemSelectedListener{
             when (it.itemId){
-                R.id.action_view_listings -> toast("Cut clicked")
-                R.id.action_my_account -> toast("Copy clicked")
-                R.id.action_logout -> toast("Paste clicked")
-                /*R.id.action_new ->{
-                    // Multiline action
-                    toast("New clicked")
-                }*/
-
+                R.id.action_view_listings -> {
+                    val intent = Intent(this, ListViewToolbarActivity::class.java)
+                    startActivity(intent)
+                }
+                R.id.action_my_account -> {
+                }
+                R.id.action_logout -> {
+                    val intent = Intent(this, LoginActivity::class.java)
+                    startActivity(intent)
+                }
             }
             // Close the drawer
             account_drawer_layout.closeDrawer(GravityCompat.START)
