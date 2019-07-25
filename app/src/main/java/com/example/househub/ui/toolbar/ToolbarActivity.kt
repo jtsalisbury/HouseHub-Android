@@ -2,8 +2,10 @@ package com.example.househub.ui.toolbar
 
 import android.support.design.widget.NavigationView;
 import android.app.Activity
+import android.app.ListActivity
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Intent
 import android.os.Bundle
 import android.support.annotation.StringRes
 import android.support.v4.view.GravityCompat
@@ -63,16 +65,23 @@ class ToolbarActivity : AppCompatActivity() {
 
         // Set navigation view navigation item selected listener
         navigation_view.setNavigationItemSelectedListener{
+            var selection = 0
             when (it.itemId){
-                R.id.action_view_listings -> toast("Cut clicked")
-                R.id.action_my_account -> toast("Copy clicked")
-                R.id.action_logout -> toast("Paste clicked")
-                /*R.id.action_new ->{
-                    // Multiline action
-                    toast("New clicked")
-                }*/
-
+                R.id.action_view_listings -> {
+                    toast("Cut clicked")
+                    selection = 1
+                }
+                R.id.action_my_account -> {
+                    toast("Copy clicked")
+                    selection = 2
+                }
+                R.id.action_logout -> {
+                    toast("Paste clicked")
+                    selection = 3
+                }
             }
+
+            selectActivity(selection)
             // Close the drawer
             drawer_layout.closeDrawer(GravityCompat.START)
             true
@@ -82,7 +91,15 @@ class ToolbarActivity : AppCompatActivity() {
     }
 
 
+    fun selectActivity(selection: Int)
+    {
+        when(selection) {
+            1 -> {
+                startActivity(Intent(this, ListActivity::class.java))
+            }
+        }
 
+    }
     /*//setting menu in action bar
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.toolbar,menu)

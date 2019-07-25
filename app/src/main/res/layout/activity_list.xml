@@ -7,8 +7,7 @@
         android:layout_height="match_parent"
         tools:context=".ui.listings.ListActivity">
 
-    <include layout="@layout/toolbar" android:id="@+id/include" tools:layout_editor_absoluteY="-39dp"
-             tools:layout_editor_absoluteX="0dp"/>
+    <include layout="@layout/toolbar" android:id="@+id/include"/>
 
     <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
