@@ -4,6 +4,7 @@ import android.support.design.widget.NavigationView;
 import android.app.Activity
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Intent
 import android.os.Bundle
 import android.support.annotation.StringRes
 import android.support.v4.view.GravityCompat
@@ -21,6 +22,8 @@ import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
 import com.example.househub.R
+import com.example.househub.ui.account.AccountInfoActivity
+import com.example.househub.ui.login.LoginActivity
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.toolbar.*
 import org.jetbrains.anko.toast
@@ -62,14 +65,16 @@ open class ListViewToolbarActivity : AppCompatActivity() {
         // Set navigation view navigation item selected listener
         navigation_view.setNavigationItemSelectedListener{
             when (it.itemId){
-                R.id.action_view_listings -> toast("Cut clicked")
-                R.id.action_my_account -> toast("Copy clicked")
-                R.id.action_logout -> toast("Paste clicked")
-                /*R.id.action_new ->{
-                    // Multiline action
-                    toast("New clicked")
-                }*/
-
+                R.id.action_view_listings -> {
+                }
+                R.id.action_my_account -> {
+                    val intent = Intent(this, AccountInfoActivity::class.java)
+                    startActivity(intent)
+                }
+                R.id.action_logout -> {
+                    val intent = Intent(this, LoginActivity::class.java)
+                    startActivity(intent)
+                }
             }
             // Close the drawer
             drawer_layout.closeDrawer(GravityCompat.START)

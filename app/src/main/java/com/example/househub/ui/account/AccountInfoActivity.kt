@@ -57,13 +57,12 @@ class AccountInfoActivity : AppCompatActivity() {
         account_navigation_view.setNavigationItemSelectedListener{
             when (it.itemId){
                 R.id.action_view_listings -> {
-                    toast("to list view")
                     val intent = Intent(this, ListViewToolbarActivity::class.java)
                     startActivity(intent)
                 }
-                R.id.action_my_account -> toast("do nothing")
+                R.id.action_my_account -> {
+                }
                 R.id.action_logout -> {
-                    toast("to login")
                     val intent = Intent(this, LoginActivity::class.java)
                     startActivity(intent)
                 }
