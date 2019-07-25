@@ -29,13 +29,11 @@ open class ListViewToolbarActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.toolbar)
-
+        setContentView(R.layout.activity_listview_toolbar)
         setSupportActionBar(findViewById(R.id.toolbar))
-        /*val actionBar = supportActionBar
-        actionBar?.title = ""*/
+        val userId = intent.getIntExtra("userId", -1)
 
-        findViewById<NavigationView>(R.id.navigation_view).setItemIconTintList(null);
+        findViewById<NavigationView>(R.id.navigation_view).setItemIconTintList(null)
 
         // Initialize the action bar drawer toggle instance
         val drawerToggle: ActionBarDrawerToggle = object : ActionBarDrawerToggle(
