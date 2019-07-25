@@ -61,7 +61,7 @@ class HTTPRequest(_url: String, _payload: Map<String, Any>, _callbackSuccess: St
 
                         val responseStr = response.toString()
 
-                        val m = object : TypeToken<Map<String, *>>() {}.type
+                        val m = object : TypeToken<Map<String, String>>() {}.type
 
                         try {
                             val obj: Map<String, String> = gson.fromJson(responseStr, m)
