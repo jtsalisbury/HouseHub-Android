@@ -85,10 +85,14 @@ class LoginActivity : AppCompatActivity() {
             setOnEditorActionListener { _, actionId, _ ->
                 when (actionId) {
                     EditorInfo.IME_ACTION_DONE ->
-                        loginViewModel.login(
-                            email.text.toString(),
-                            password.text.toString()
-                        )
+                        Thread(Runnable {
+                            loginViewModel.login(
+                                email.text.toString(),
+                                password.text.toString()
+                            )
+                            val intent = Intent(context, ToolbarActivity::class.java)
+                            startActivity(intent)
+                        }).start()
                 }
                 false
             }
