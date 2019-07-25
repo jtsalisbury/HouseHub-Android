@@ -24,7 +24,7 @@ class AccountInfoActivity : AppCompatActivity() {
         /*val actionBar = supportActionBar
         actionBar?.title = ""*/
 
-        findViewById<NavigationView>(R.id.navigation_view).setItemIconTintList(null);
+        findViewById<NavigationView>(R.id.account_navigation_view).setItemIconTintList(null);
 
         // Initialize the action bar drawer toggle instance
         val drawerToggle: ActionBarDrawerToggle = object : ActionBarDrawerToggle(
