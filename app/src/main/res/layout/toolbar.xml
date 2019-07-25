@@ -56,6 +56,52 @@
                 android:layout_marginEnd="8dp"
                 android:fontFamily="@font/fredoka_one"/>
 
+        <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:id="@+id/search_bar"
+                app:layout_constraintTop_toBottomOf="@+id/toolbar"
+                tools:layout_editor_absoluteX="-59dp">
+
+            <EditText
+                    android:layout_width="192dp"
+                    android:layout_height="45dp"
+                    android:inputType="textFilter"
+                    android:hint="Search Listings..."
+                    android:textColor="@color/colorWhite"
+                    android:ems="10"
+                    android:id="@+id/editText"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:textColorHint="#FFFFFF"
+                    android:backgroundTint="@color/colorWhite"
+                    android:layout_marginStart="8dp"/>
+
+            <android.support.design.button.MaterialButton
+                    android:text="View Listings"
+                    android:textColor="@color/colorWhite"
+                    android:background="@color/colorPrimaryDark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/view_listings_button"
+                    app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent" android:fontFamily="sans-serif"
+                    android:textAllCaps="false" android:textSize="16sp" android:backgroundTint="@color/colorPrimaryDark"
+                    app:strokeWidth="2dp" app:strokeColor="@color/colorWhite"
+                    android:shadowColor="@color/colorPrimary"/>
+
+
+        </android.support.constraint.ConstraintLayout>
+
+        <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="636dp"
+                android:id="@+id/scroll_view"
+                app:layout_constraintTop_toBottomOf="@+id/search_bar">
+
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                          android:orientation="vertical"/>
+        </ScrollView>
 
     </android.support.constraint.ConstraintLayout>
 

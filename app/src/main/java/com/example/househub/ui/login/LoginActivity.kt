@@ -17,10 +17,8 @@ import android.widget.ProgressBar
 import android.widget.Toast
 import com.example.househub.R
 import com.example.househub.ui.account.AccountInfoActivity
-import com.example.househub.ui.listings.ListViewActivity
-
-
-
+import com.example.househub.ui.listings.ListViewToolbarActivity
+import com.example.househub.ui.toolbar.ToolbarActivity
 
 
 class LoginActivity : AppCompatActivity() {
@@ -94,7 +92,7 @@ class LoginActivity : AppCompatActivity() {
                                 password.text.toString()
                             )
                             //val i = Intent("com.example.househub.ui.listings.ListActivity")
-                            val intent = Intent(context, ListViewActivity::class.java)
+                            val intent = Intent(context, ListViewToolbarActivity::class.java)
                             startActivity(intent)
                         }).start()
                 }
@@ -106,7 +104,7 @@ class LoginActivity : AppCompatActivity() {
 
                 Thread(Runnable {
                     loginViewModel.login(email.text.toString(), password.text.toString())
-                    val intent = Intent(context, AccountInfoActivity::class.java)
+                    val intent = Intent(context, ListViewToolbarActivity::class.java)
                     startActivity(intent)
                 }).start()
             }
