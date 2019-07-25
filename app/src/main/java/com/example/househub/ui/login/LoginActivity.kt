@@ -1,7 +1,6 @@
 package com.example.househub.ui.login
 
 import android.app.Activity
-import android.app.ListActivity
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
@@ -97,7 +96,7 @@ class LoginActivity : AppCompatActivity() {
                 loading.visibility = View.VISIBLE
                 loginViewModel.login(email.text.toString(), password.text.toString())
 
-                val intent = Intent(context, ListActivity::class.java)
+                val intent = Intent(context, ToolbarActivity::class.java)
                 startActivity(intent)
             }
         }
