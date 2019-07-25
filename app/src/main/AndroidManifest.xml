@@ -12,6 +12,15 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
         <activity
+                android:name=".ui.detailListing.DetailListView"
+                android:label="@string/title_activity_detail_list_view"
+                android:parentActivityName=".ui.listings.ListViewToolbarActivity"
+                android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value="com.example.househub.ui.listings.ListViewToolbarActivity"/>
+        </activity>
+        <activity
                 android:name=".ui.account.AccountInfoActivity"
                 android:label="@string/title_activity_account_info"
                 android:parentActivityName=".ui.listings.ListViewToolbarActivity"
@@ -25,7 +34,6 @@
                 android:label="@string/title_activity_list_view"
                 android:theme="@style/AppTheme.NoActionBar">
         </activity>
-
         <activity
                 android:name=".ui.toolbar.ToolbarActivity"
                 android:label="@string/title_activity_toolbar"
