@@ -1,6 +1,7 @@
 package com.example.househub.data
 
 import com.example.househub.data.model.LoggedInUser
+import java.lang.Exception
 
 /**
  * Class that requests authentication and user information from the remote data source and
@@ -32,13 +33,13 @@ class LoginRepository(val dataSource: LoginDataSource) {
         val result = dataSource.login(email, password)
 
         // User failed to login
-        /*if (result == -1) {
+        if (result == Result.Error(Exception())) {
 
         }
         // User successfully logged in
         else {
-            setLoggedInUser(result)
-        }*/
+            //setLoggedInUser(result)
+        }
 
         return result
     }

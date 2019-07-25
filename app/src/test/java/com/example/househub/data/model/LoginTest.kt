@@ -8,24 +8,19 @@ import org.junit.Test
 
 class LoginTest {
     @Test
-    fun testEncodeDecode() {
-        val email = "test@gmail.com"
-        val password = "asdf"
+    fun testLogin() {
+        val email = "test@gmail.com" // test@gmail.com
+        val password = "test" //asdf
 
-        val jwt: JWT = JWT()
-        val gson = Gson()
-        val realToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.xc6B91TEdgoaYm7ZARLvGKVYWXWW4FG0Qk4ivGp2ZeY3lUMGK+r+65+EgyggDFOv.MDY1OThjN2FjZjA0NzE3OWFjODRlZDQ4MjExZWI0ZWVlNTRmOTk3NDIwODc1MjA2YjUyNDc0NjVjNjUwZGZkMQ=="
+        val jwt = JWT()
         val payload = mapOf("email" to email, "pass" to password)
-        val token = jwt.generateToken(payload)
-
-        val token2 = mapOf("token" to token)
-        var tokenEnc = gson.toJson(token2)
 
         val url = "http://u747950311.hostingerapp.com/househub/api/user/login.php"
         var success = ""
         var fail = ""
         val h = HTTPRequest(url, payload, success, fail)
         val results = h.open()
+
         success = results.first
         fail = results.second
 

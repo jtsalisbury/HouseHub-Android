@@ -4,6 +4,11 @@ package com.example.househub.ui.login
  * User details post authentication that is exposed to the UI
  */
 data class LoggedInUserView(
-    val displayName: String
-    //... other data fields that may be accessible to the UI
+    val firstName: String,
+    val lastName: String,
+    val displayName: String,
+    val email: String,
+    val admin: String,
+    val createdDate: String,
+    val userId: Int
 )

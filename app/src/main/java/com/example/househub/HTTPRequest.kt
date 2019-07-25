@@ -19,10 +19,10 @@ class HTTPRequest(_url: String, _payload: Map<String, Any>, _callbackSuccess: St
 
 
     fun open(): Pair<String, String> {
-        val jwt = JWT();
+        val jwt = JWT()
 
         val gson = Gson()
-        val token = jwt.generateToken(payload);
+        val token = jwt.generateToken(payload)
 
         val tokenEncoded = gson.toJson(mapOf("token" to token))
 
@@ -39,7 +39,7 @@ class HTTPRequest(_url: String, _payload: Map<String, Any>, _callbackSuccess: St
             setRequestProperty("Content-Type", "application/json")
 
             try {
-                val outputStream: DataOutputStream = DataOutputStream(outputStream)
+                val outputStream = DataOutputStream(outputStream)
                 outputStream.write(postData)
                 outputStream.flush()
             } catch (exception: Exception) {
