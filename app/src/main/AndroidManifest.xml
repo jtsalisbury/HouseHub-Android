@@ -25,16 +25,7 @@
                 android:label="@string/title_activity_list_view"
                 android:theme="@style/AppTheme.NoActionBar">
         </activity>
-        <activity
-                android:name=".ui.listings.ListActivity"
-                android:label="@string/title_activity_list"
-                android:theme="@style/AppTheme">
-            <intent-filter>
-                <action android:name="com.example.househub.ui.listings.ListActivity"/>
 
-                <category android:name="android.intent.category.BROWSABLE"/>
-            </intent-filter>
-        </activity>
         <activity
                 android:name=".ui.toolbar.ToolbarActivity"
                 android:label="@string/title_activity_toolbar"
