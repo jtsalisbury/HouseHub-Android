@@ -47,7 +47,7 @@ class AccountInfoActivity : AppCompatActivity() {
 
         // Configure the drawer layout to add listener and show icon on toolbar
         drawerToggle.isDrawerIndicatorEnabled = true
-        drawer_layout.addDrawerListener(drawerToggle)
+        account_drawer_layout.addDrawerListener(drawerToggle)
         drawerToggle.syncState()
 
         // Set navigation view navigation item selected listener
