@@ -59,6 +59,7 @@
             android:layout_marginStart="24dp"
             android:layout_marginEnd="24dp"
 
+            android:text="test@gmail.com"
             android:hint="@string/prompt_email"
             android:inputType="textEmailAddress"
             android:selectAllOnFocus="true"
@@ -75,6 +76,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="24dp"
 
+            android:text="test"
             android:hint="@string/prompt_password"
             android:imeActionLabel="@string/action_sign_in_short"
             android:imeOptions="actionDone"

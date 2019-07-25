@@ -3,7 +3,6 @@ package com.example.househub.data
 import com.example.househub.HTTPRequest
 import com.example.househub.JWT
 import com.example.househub.data.model.LoggedInUser
-import com.google.gson.Gson
 import java.io.IOException
 
 /**
@@ -14,22 +13,16 @@ class LoginDataSource {
     fun login(email: String, password: String): Result<LoggedInUser> {
         try {
             // TODO: handle loggedInUser authentication
-            val jwt: JWT = JWT()
-            val gson = Gson()
+            val jwt = JWT()
             val payload = mapOf("email" to email, "pass" to password)
-            val token = jwt.generateToken(payload)
-
-            val token2 = mapOf("token" to token)
-            val tokenEnc = gson.toJson(token2)
-            if(!jwt.verifyToken(tokenEnc)) {
-                // TODO: handle invalid token
-            }
 
             val url = "http://u747950311.hostingerapp.com/househub/api/user/login.php"
             var success = ""
             var fail = ""
-            val h = HTTPRequest(url, payload, success, fail)
-            val results = h.open()
+
+            val httpRequest = HTTPRequest(url, payload, success, fail)
+            val results = httpRequest.open()
+
             success = results.first
             fail = results.second
 
@@ -37,13 +30,11 @@ class LoginDataSource {
                 // TODO: handle failed login
             }
 
-            val test = jwt.decodePayload(success)
+            val retrievedInfo = jwt.decodePayload(success)
 
-            /*val fakeUser = LoggedInUser(java.util.UUID.randomUUID().toString(), "Jane Doe")
-            return Result.Success(fakeUser)*/
-            val user = LoggedInUser(java.util.UUID.randomUUID().toString(), test["name"].toString())
+            val user = LoggedInUser(retrievedInfo["fname"].toString(), retrievedInfo["lname"].toString(), retrievedInfo["fname"].toString() + " " + retrievedInfo["lname"], retrievedInfo["email"].toString(), retrievedInfo["admin"].toString(), retrievedInfo["created"].toString(), retrievedInfo["uid"].toString().toInt())
+
             return Result.Success(user)
-            //return test["id"].toString().toInt()
 
         } catch (e: Throwable) {
             return Result.Error(IOException("Error logging in", e))
@@ -54,4 +45,20 @@ class LoginDataSource {
         // TODO: revoke authentication
     }
 }
+
+/*class someTask() : AsyncTask<Void, Void, String>() {
+    override fun doInBackground(vararg params: Void?): String? {
+        // ...
+    }
+
+    override fun onPreExecute() {
+        super.onPreExecute()
+        // ...
+    }
+
+    override fun onPostExecute(result: String?) {
+        super.onPostExecute(result)
+        // ...
+    }
+}*/
 
