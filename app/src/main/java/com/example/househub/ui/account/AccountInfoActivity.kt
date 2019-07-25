@@ -20,7 +20,7 @@ class AccountInfoActivity : AppCompatActivity() {
         setContentView(R.layout.activity_account_info)
         setSupportActionBar(account_toolbar)
 
-        setSupportActionBar(findViewById(R.id.toolbar))
+        setSupportActionBar(findViewById(R.id.account_toolbar))
         /*val actionBar = supportActionBar
         actionBar?.title = ""*/
 
