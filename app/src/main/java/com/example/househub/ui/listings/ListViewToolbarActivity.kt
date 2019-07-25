@@ -21,6 +21,7 @@ import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
 import com.example.househub.R
+import com.example.househub.ui.login.LoginActivity
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.toolbar.*
 import org.jetbrains.anko.toast
@@ -32,6 +33,7 @@ open class ListViewToolbarActivity : AppCompatActivity() {
         setContentView(R.layout.activity_listview_toolbar)
         setSupportActionBar(findViewById(R.id.toolbar))
         val userId = intent.getIntExtra("userId", -1)
+        val userId2 = LoginActivity.userIdGlobal
 
         findViewById<NavigationView>(R.id.navigation_view).setItemIconTintList(null)
 

@@ -17,6 +17,7 @@ import android.widget.ProgressBar
 import android.widget.Toast
 import com.example.househub.R
 import com.example.househub.data.model.LoggedInUser
+import com.example.househub.ui.account.AccountInfoActivity
 import com.example.househub.ui.listings.ListViewToolbarActivity
 
 
@@ -24,11 +25,20 @@ class LoginActivity : AppCompatActivity() {
 
     private lateinit var loginViewModel: LoginViewModel
 
+    companion object {
+        var firstNameGlobal = ""
+        var lastNameGlobal = ""
+        var displayNameGlobal = ""
+        var emailGlobal = ""
+        var adminGlobal = -1
+        var createdDateGlobal = ""
+        var userIdGlobal = -1
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_login)
-
         val email = findViewById<EditText>(R.id.email)
         val password = findViewById<EditText>(R.id.password)
         val login = findViewById<Button>(R.id.login)
@@ -90,8 +100,8 @@ class LoginActivity : AppCompatActivity() {
                                 email.text.toString(),
                                 password.text.toString()
                             )
-                            intent.putExtra("userId", userId)
                             val intent = Intent(context, ListViewToolbarActivity::class.java)
+                            intent.putExtra("userId", userId)
                             startActivity(intent)
                         }).start()
                 }

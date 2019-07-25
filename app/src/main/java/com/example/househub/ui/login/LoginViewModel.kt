@@ -30,9 +30,18 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
                 createdDate = result.data.createdDate,
                 displayName = result.data.displayName,
                 userId = result.data.userId)))
+
+            LoginActivity.firstNameGlobal = result.data.firstName
+            LoginActivity.lastNameGlobal = result.data.lastName
+            LoginActivity.emailGlobal = result.data.email
+            LoginActivity.adminGlobal = result.data.admin.toInt()
+            LoginActivity.createdDateGlobal = result.data.createdDate
+            LoginActivity.displayNameGlobal = result.data.displayName
+            LoginActivity.userIdGlobal = result.data.userId
+
             return result.data.userId
         } else {
-            _loginResult.value = LoginResult(error = R.string.login_failed)
+            _loginResult.postValue(LoginResult(error = R.string.login_failed))
             return -1
         }
     }
