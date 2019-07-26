@@ -17,7 +17,7 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
     private val _loginResult = MutableLiveData<LoginResult>()
     val loginResult: LiveData<LoginResult> = _loginResult
 
-    fun login(email: String, password: String): Int {
+    fun login(email: String, password: String): Boolean {
         // can be launched in a separate asynchronous job
         val result = loginRepository.login(email, password)
 
@@ -38,11 +38,10 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
             LoginActivity.createdDateGlobal = result.data.createdDate
             LoginActivity.displayNameGlobal = result.data.displayName
             LoginActivity.userIdGlobal = result.data.userId
-
-            return result.data.userId
+            return true
         } else {
             _loginResult.postValue(LoginResult(error = R.string.login_failed))
-            return -1
+            return false
         }
     }
 

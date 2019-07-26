@@ -28,6 +28,7 @@ class LoginDataSource {
 
             if(fail != "") {
                 // TODO: handle failed login
+                return Result.Error(Exception("Incorrect email or password."))
             }
 
             val retrievedInfo = jwt.decodePayload(success)
@@ -45,20 +46,4 @@ class LoginDataSource {
         // TODO: revoke authentication
     }
 }
-
-/*class someTask() : AsyncTask<Void, Void, String>() {
-    override fun doInBackground(vararg params: Void?): String? {
-        // ...
-    }
-
-    override fun onPreExecute() {
-        super.onPreExecute()
-        // ...
-    }
-
-    override fun onPostExecute(result: String?) {
-        super.onPostExecute(result)
-        // ...
-    }
-}*/
 

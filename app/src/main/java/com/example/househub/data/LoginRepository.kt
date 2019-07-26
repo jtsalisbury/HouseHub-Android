@@ -29,19 +29,7 @@ class LoginRepository(val dataSource: LoginDataSource) {
     }
 
     fun login(email: String, password: String): Result<LoggedInUser> {
-        // handle login
-        val result = dataSource.login(email, password)
-
-        // User failed to login
-        if (result == Result.Error(Exception())) {
-
-        }
-        // User successfully logged in
-        else {
-            //setLoggedInUser(result)
-        }
-
-        return result
+        return dataSource.login(email, password)
     }
 
     private fun setLoggedInUser(loggedInUser: LoggedInUser) {

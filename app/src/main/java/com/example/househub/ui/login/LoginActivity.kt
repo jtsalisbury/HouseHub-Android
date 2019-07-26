@@ -37,12 +37,20 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContentView(R.layout.activity_login)
         val email = findViewById<EditText>(R.id.email)
         val password = findViewById<EditText>(R.id.password)
         val login = findViewById<Button>(R.id.login)
         val loading = findViewById<ProgressBar>(R.id.loading)
+
+        // Reset Global Variables
+        firstNameGlobal = ""
+        lastNameGlobal = ""
+        displayNameGlobal = ""
+        emailGlobal = ""
+        adminGlobal = -1
+        createdDateGlobal = ""
+        userIdGlobal = -1
 
         loginViewModel = ViewModelProviders.of(this, LoginViewModelFactory())
             .get(LoginViewModel::class.java)
@@ -70,11 +78,10 @@ class LoginActivity : AppCompatActivity() {
             }
             if (loginResult.success != null) {
                 updateUiWithUser(loginResult.success)
+                setResult(Activity.RESULT_OK)
+                //Complete and destroy login activity once successful
+                finish()
             }
-            setResult(Activity.RESULT_OK)
-
-            //Complete and destroy login activity once successful
-            finish()
         })
 
         email.afterTextChanged {
@@ -96,13 +103,14 @@ class LoginActivity : AppCompatActivity() {
                 when (actionId) {
                     EditorInfo.IME_ACTION_DONE ->
                         Thread(Runnable {
-                            val userId = loginViewModel.login(
-                                email.text.toString(),
-                                password.text.toString()
-                            )
-                            val intent = Intent(context, ListViewToolbarActivity::class.java)
-                            intent.putExtra("userId", userId)
-                            startActivity(intent)
+                            val loginResult = loginViewModel.login(email.text.toString(), password.text.toString())
+                            if (loginResult) {
+                                val intent = Intent(context, ListViewToolbarActivity::class.java)
+                                startActivity(intent)
+                            }
+                            else {
+                                showLoginFailed(R.string.login_failed)
+                            }
                         }).start()
                 }
                 false
@@ -112,10 +120,11 @@ class LoginActivity : AppCompatActivity() {
                 loading.visibility = View.VISIBLE
 
                 Thread(Runnable {
-                    val userId = loginViewModel.login(email.text.toString(), password.text.toString())
-                    val intent = Intent(context, ListViewToolbarActivity::class.java)
-                    intent.putExtra("userId", userId)
-                    startActivity(intent)
+                    val loginResult = loginViewModel.login(email.text.toString(), password.text.toString())
+                    if (loginResult) {
+                        val intent = Intent(context, ListViewToolbarActivity::class.java)
+                        startActivity(intent)
+                    }
                 }).start()
             }
         }
