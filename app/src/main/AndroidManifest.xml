@@ -19,6 +19,11 @@
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
                     android:value="com.example.househub.ui.listings.ListViewToolbarActivity"/>
+            <intent-filter>
+                <action android:name="package.OtherActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity>
         <activity
                 android:name=".ui.account.AccountInfoActivity"
@@ -33,11 +38,11 @@
                 android:name=".ui.listings.ListViewToolbarActivity"
                 android:label="@string/title_activity_list_view"
                 android:theme="@style/AppTheme.NoActionBar">
-        </activity>
-        <activity
-                android:name=".ui.toolbar.ToolbarActivity"
-                android:label="@string/title_activity_toolbar"
-                android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="package.OtherActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity>
         <activity
                 android:name=".ui.login.LoginActivity"
