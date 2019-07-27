@@ -28,6 +28,7 @@ class DetailListView : AppCompatActivity() {
         setContentView(R.layout.activity_detail_list_view)
         setSupportActionBar(findViewById(R.id.detail_toolbar))
 
+        val test = intent.getStringExtra("title")
 //        val num_pictures = getIntent.getIntExtra()
 //        val user_id = getIntent.getIntExtra()
         var picture_id = 0

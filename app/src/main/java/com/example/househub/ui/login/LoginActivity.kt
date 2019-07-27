@@ -123,7 +123,7 @@ class LoginActivity : AppCompatActivity() {
                 Thread(Runnable {
                     val loginResult = loginViewModel.login(email.text.toString(), password.text.toString())
                     if (loginResult) {
-                        val intent = Intent(context, DetailListView::class.java)
+                        val intent = Intent(context, ListViewToolbarActivity::class.java)
                         startActivity(intent)
                     }
                 }).start()

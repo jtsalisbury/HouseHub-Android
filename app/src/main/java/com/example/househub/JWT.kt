@@ -127,26 +127,6 @@ class JWT {
     }
 
     // Gets the payload from a token
-    fun decodePayload2(token: String): Map<String, Any> {
-        val parts: Array<String> = token.split(".").toTypedArray()
-
-        if (parts.size < 3) {
-            return mapOf("" to "")
-        }
-
-        val gson = Gson()
-
-        val payload = parts[1]
-        val decrpted = decrypt(payload)
-
-
-
-        val m = object : TypeToken<Map<String, String>>() {}.type
-
-        return gson.fromJson(decode64(decrpted), m)
-    }
-
-    // Gets the payload from a token
     fun decodePayloadSublet(token: String): ListingPayload {
         val parts: Array<String> = token.split(".").toTypedArray()
 
