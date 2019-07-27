@@ -7,6 +7,7 @@ import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
+import android.widget.TextView
 import com.example.househub.HTTPRequest
 import com.example.househub.JWT
 import com.example.househub.R
@@ -15,6 +16,7 @@ import com.example.househub.ui.listings.ListViewToolbarActivity
 import com.example.househub.ui.login.LoginActivity
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_detail_list_view.*
 import kotlinx.android.synthetic.main.toolbar.*
 import org.jetbrains.anko.toast
@@ -87,6 +89,25 @@ class DetailListView : AppCompatActivity() {
             detail_drawer_layout.closeDrawer(GravityCompat.START)
             true
         }
+
+        val pid = getIntent().getIntExtra("pid", 0)
+        val uid = getIntent().getIntExtra("uid", 0)
+
+        fun setPicture(picture_id: Int)
+        {
+            
+        }
+
+
+
+
+        val pid_text: TextView = findViewById<TextView>(R.id.desc)
+        pid_text.text = "pid = " + pid.toString()
+
+        val uid_text: TextView = findViewById<TextView>(R.id.price)
+        uid_text.text = "uid = " + uid.toString()
+
+        Picasso.get().load("http://u747950311.hostingerapp.com/househub/api/images/1/0.jpg").into(images)
 
         /*val pid = getIntent().getIntExtra("pid", 0)
         val uid = getIntent().getIntExtra("uid", 0)
