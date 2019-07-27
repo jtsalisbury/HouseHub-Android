@@ -1,6 +1,6 @@
 package com.example.househub
 
-import com.example.househub.ui.listings.ListingData
+import com.example.househub.data.model.ListingPayload
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import java.util.*
@@ -147,7 +147,7 @@ class JWT {
     }
 
     // Gets the payload from a token
-    fun decodePayloadSublet(token: String): Pair<Map<String, Any>, List<Map<String, Any>>> {
+    fun decodePayloadSublet(token: String): ListingPayload {
         val parts: Array<String> = token.split(".").toTypedArray()
 
         if (parts.size < 3) {
@@ -156,26 +156,18 @@ class JWT {
 
         val gson = Gson()
 
-        val payload = parts[1]
+        var payload = parts[1]
         val decrypted = decrypt(payload)
 
-        val m = object : TypeToken<Map<String, String>>() {}.type
-        val n = object : TypeToken<Map<String, String>>() {}.type
+        val m = object : TypeToken<ListingPayload>() {}.type
 
-        val string = decode64(decrypted)
-        var string1 = ""
-        var string2 = ""
+        payload = decode64(decrypted)
 
-        // Get general info
-        var pos = 0
-        var commas = 0
-        while(commas != 5) {
-            if(string[pos].toString() == ",") commas++
-            string1+=string[pos].toString()
-            pos++
-        }
-        string1 = string1.dropLast(1) + "}"
-        val pages = gson.fromJson(string1, m) as Map<String, Any>
+        val res: ListingPayload = gson.fromJson(payload, m);
+
+        return res
+
+        //val pages = gson.fromJson(string1, m) as Map<String, Any>
 
         // This works!  It's because there's an error for when trying to fromJson images for some reason.
         // I removed images from this request, which is why it works.
@@ -195,7 +187,7 @@ class JWT {
         val testResult4 = gson.fromJson(test2, m) as Map<String, Any>*/
 
         // Get listings
-        val listings = mutableListOf<Map<String, Any>>()
+       /* val listings = mutableListOf<Map<String, Any>>()
         var listingCount = 0
         pos = pos+12
         while(pos < string.length-2) {
@@ -208,9 +200,9 @@ class JWT {
                 pos++
                 string2 = ""
             }
-        }
+        }*/
 
         //val subletList= gson.fromJson(string2, n) as List<Map<String, Any>>
-        return Pair(pages, listings)
+        //return Pair(pages, listings)
     }
 }
