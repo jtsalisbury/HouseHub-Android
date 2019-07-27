@@ -23,17 +23,15 @@ import org.jetbrains.anko.toast
 
 class DetailListView : AppCompatActivity() {
 
-    /*fun setFieldValues(listing: Map<String, String>) {
-        // TODO: Grab images map from listing["images"] (possibly need to convert another json string)
-        // TODO: Add buttons to sides of imageview in order to be able to switch through the images array
-        // set all field values!
-    }*/
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail_list_view)
         setSupportActionBar(findViewById(R.id.detail_toolbar))
-        //val userId = intent.getIntExtra("userId", -1)
+
+//        val num_pictures = getIntent.getIntExtra()
+//        val user_id = getIntent.getIntExtra()
+        var picture_id = 0
+        var url = "http://u747950311.hostingerapp.com/househub/api/images"
 
         findViewById<NavigationView>(R.id.detail_navigation_view).setItemIconTintList(null)
 
@@ -90,59 +88,41 @@ class DetailListView : AppCompatActivity() {
             true
         }
 
-        val pid = getIntent().getIntExtra("pid", 0)
-        val uid = getIntent().getIntExtra("uid", 0)
+//        fun setPicture(left_right: Boolean) { //left = false, right = true
+//            if(left_right == false && picture_id > 0){
+//                //move to previous picture
+//                picture_id -= 1
+//                url = url + "/" + user_id.toString() + "/" + picture_id.toString() + ".jpg"
+//                Picasso.get().load(url).into(images)
+//            }
+//            else if(left_right == true && picture_id < (num_pictures + 1)){
+//                //move to next picture
+//                picture_id += 1
+//                url = url + "/" + user_id.toString() + "/" + picture_id.toString() + ".jpg"
+//                Picasso.get().load(url).into(images)
+//            }
+//            else{
+//                //do nothing
+//            }
+//        }
+//
+//        arrow_left.setOnClickListener{
+//            setPicture(false)
+//        }
+//
+//        arrow_right.setOnClickListener{
+//            setPicture(true)
+//        }
 
-        fun setPicture(picture_id: Int)
-        {
-            
-        }
 
-
-
-
-        val pid_text: TextView = findViewById<TextView>(R.id.desc)
-        pid_text.text = "pid = " + pid.toString()
-
-        val uid_text: TextView = findViewById<TextView>(R.id.price)
-        uid_text.text = "uid = " + uid.toString()
+//        val num_pictures_text: TextView = findViewById<TextView>(R.id.desc)
+//        num_pictures_text.text = "num_pictures = " + num_pictures.toString()
+//
+//        val user_id_text: TextView = findViewById<TextView>(R.id.price)
+//        user_id_text.text = "user_id = " + user_id.toString()
 
         Picasso.get().load("http://u747950311.hostingerapp.com/househub/api/images/1/0.jpg").into(images)
 
-        /*val pid = getIntent().getIntExtra("pid", 0)
-        val uid = getIntent().getIntExtra("uid", 0)
-
-        val jwt = JWT()
-        val payload = mapOf("pid" to pid, "requesterid" to uid)
-
-        Thread(Runnable {
-            val req = HTTPRequest("http://u747950311.hostingerapp.com/househub/api/listings/retrieve.php", payload, "", "")
-            val results = req.open()
-
-            val success = results.first
-            val fail    = results.second
-            val gson = Gson()
-
-            if (fail == "" && jwt.verifyToken(success)) {
-                var payload = jwt.decodePayload(success)
-
-                *//*
-
-                    THIS LINE MAY BE WRONG. LISTINGS MAY BE RETURNED AS A MAP, NOT A STRING
-
-                 *//*
-                val m = object : TypeToken<Map<String, String>>() {}.type
-                payload = gson.fromJson(payload["listings"].toString(), m)
-
-                // get first listing from payload map
-                var first = payload[payload.keys.toTypedArray()[0]].toString()
-
-                var listing: Map<String, String> = gson.fromJson(first, m)
-
-                setFieldValues(listing)
-            }
-
-        }).start()*/
 
     }
 
