@@ -77,7 +77,7 @@ class AccountInfoActivity : AppCompatActivity() {
         val account_email: TextView = findViewById<TextView>(R.id.account_email)
         val account_date: TextView = findViewById<TextView>(R.id.account_date)
 
-        account_name.text = LoginActivity.firstNameGlobal + LoginActivity.lastNameGlobal
+        account_name.text = LoginActivity.firstNameGlobal + " " + LoginActivity.lastNameGlobal
         account_email.text = LoginActivity.emailGlobal
         account_date.text = LoginActivity.createdDateGlobal
     }
