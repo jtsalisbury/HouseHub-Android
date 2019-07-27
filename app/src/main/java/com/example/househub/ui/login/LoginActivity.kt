@@ -18,6 +18,7 @@ import android.widget.Toast
 import com.example.househub.R
 import com.example.househub.data.model.LoggedInUser
 import com.example.househub.ui.account.AccountInfoActivity
+import com.example.househub.ui.detailListing.DetailListView
 import com.example.househub.ui.listings.ListViewToolbarActivity
 
 
@@ -122,7 +123,7 @@ class LoginActivity : AppCompatActivity() {
                 Thread(Runnable {
                     val loginResult = loginViewModel.login(email.text.toString(), password.text.toString())
                     if (loginResult) {
-                        val intent = Intent(context, ListViewToolbarActivity::class.java)
+                        val intent = Intent(context, DetailListView::class.java)
                         startActivity(intent)
                     }
                 }).start()

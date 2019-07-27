@@ -203,7 +203,7 @@ class JWT {
             string2+=char
             pos++
             if(char == "}" && string2.length > 30) {
-                listings[listingCount] = gson.fromJson(string2, n) as Map<String, Any>
+                //listings[listingCount] = gson.fromJson(string2, n) as Map<String, Any>
                 listingCount++
                 pos++
                 string2 = ""
