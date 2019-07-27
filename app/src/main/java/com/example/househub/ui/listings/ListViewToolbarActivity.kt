@@ -17,18 +17,20 @@ import android.text.TextWatcher
 import android.view.Menu
 import android.view.View
 import android.view.inputmethod.EditorInfo
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ProgressBar
-import android.widget.Toast
+import android.widget.*
+import com.example.househub.HTTPRequest
+import com.example.househub.JWT
 import com.example.househub.R
 import com.example.househub.ui.account.AccountInfoActivity
 import com.example.househub.ui.login.LoginActivity
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.toolbar.*
 import org.jetbrains.anko.toast
 
 open class ListViewToolbarActivity : AppCompatActivity() {
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -82,14 +84,51 @@ open class ListViewToolbarActivity : AppCompatActivity() {
             true
         }
 
+        Thread(Runnable {
+            val jwt = JWT()
+            val payload = mapOf("requesterid" to LoginActivity.userIdGlobal)
+
+            val url = "http://u747950311.hostingerapp.com/househub/api/listings/retrieve.php"
+            //var success: Map<String, Any>? = null
+            var success = ""
+            var fail = ""
+
+            val httpRequest = HTTPRequest(url, payload, success, fail)
+            val results = httpRequest.open()
+
+            success = results.first
+            fail = results.second
+
+            if(fail != "") {
+                // TODO: handle failed retrieval
+            }
+
+            val retrievedInfo = jwt.decodePayloadSublet(success)
+
+            //val user = LoggedInUser(retrievedInfo["fname"].toString(), retrievedInfo["lname"].toString(), retrievedInfo["fname"].toString() + " " + retrievedInfo["lname"], retrievedInfo["email"].toString(), retrievedInfo["admin"].toString(), retrievedInfo["created"].toString(), retrievedInfo["uid"].toString().toInt())
+
+            val didItCrash = false
+
+        }).start()
+
+        // List View
+        /*val listView = findViewById<ListView>(R.id.sublet_list_view)
+        val subletList = Recipe.getRecipesFromFile("recipes.json", this)
+        val listItems = arrayOfNulls<String>(subletList.size)
+        for (i in 0 until subletList.size) {
+            val recipe = subletList[i]
+            listItems[i] = recipe.title
+        }
+        val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, listItems)
+        listView.adapter = adapter*/
 
     }
 
 
 
-    /*//setting menu in action bar
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.toolbar,menu)
-        return super.onCreateOptionsMenu(menu)
-    }*/
+    fun setFieldValues(listing: Map<String, String>) {
+        // TODO: Grab images map from listing["images"] (possibly need to convert another json string)
+        // TODO: Add buttons to sides of imageview in order to be able to switch through the images array
+        // set all field values!
+    }
 }

@@ -1,5 +1,6 @@
 package com.example.househub
 
+import com.example.househub.ui.listings.ListingData
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import java.util.*
@@ -123,5 +124,93 @@ class JWT {
         val m = object : TypeToken<Map<String, String>>() {}.type
 
         return gson.fromJson(decode64(decrpted), m)
+    }
+
+    // Gets the payload from a token
+    fun decodePayload2(token: String): Map<String, Any> {
+        val parts: Array<String> = token.split(".").toTypedArray()
+
+        if (parts.size < 3) {
+            return mapOf("" to "")
+        }
+
+        val gson = Gson()
+
+        val payload = parts[1]
+        val decrpted = decrypt(payload)
+
+
+
+        val m = object : TypeToken<Map<String, String>>() {}.type
+
+        return gson.fromJson(decode64(decrpted), m)
+    }
+
+    // Gets the payload from a token
+    fun decodePayloadSublet(token: String): Pair<Map<String, Any>, List<Map<String, Any>>> {
+        val parts: Array<String> = token.split(".").toTypedArray()
+
+        if (parts.size < 3) {
+            //return mapOf("" to "")
+        }
+
+        val gson = Gson()
+
+        val payload = parts[1]
+        val decrypted = decrypt(payload)
+
+        val m = object : TypeToken<Map<String, String>>() {}.type
+        val n = object : TypeToken<Map<String, String>>() {}.type
+
+        val string = decode64(decrypted)
+        var string1 = ""
+        var string2 = ""
+
+        // Get general info
+        var pos = 0
+        var commas = 0
+        while(commas != 5) {
+            if(string[pos].toString() == ",") commas++
+            string1+=string[pos].toString()
+            pos++
+        }
+        string1 = string1.dropLast(1) + "}"
+        val pages = gson.fromJson(string1, m) as Map<String, Any>
+
+        // This works!  It's because there's an error for when trying to fromJson images for some reason.
+        // I removed images from this request, which is why it works.
+        /*var test = "{\"pid\":\"80\",\"title\":\"Luxurious Apartment Near UC\",\"desc\":\"Elegant custom home offers unparalleled craftsmanship and exceptional amenities! This French inspired design is truly remarkable inside and out. Features include cabinets, counter tops, custom windows provide plenty of natural lighting, kitchen with (no) island (great for entertaining), gorgeous master suite, storage, plus STUNNING views of Kroger. Fantastic selfie mirror allows for great lighting! Extremely functional pull-out couch provided. Parking not provided. Animals under 50lbs allowed. Available anytime.\",\"loc\":\"2508 Auburn Ave Cincinnati, OH 45219\",\"base_price\":\"400\",\"add_price\":\"Utilities\",\"creator_uid\":\"56\",\"num_pictures\":\"5\",\"created\":\"2019-07-25 18:17:52\",\"modified\":\"2019-07-25 18:17:52\",\"creator_fname\":\"JT\",\"creator_lname\":\"Salisbury\",\"creator_email\":\"crazyscouter1@gmail.com\",\"hidden\":\"0\",\"saved\":\"0\"}"
+        val testResult = gson.fromJson(test, m) as Map<String, Any>
+
+        val coolKidTest = "{\"pid\":\"80\",\"title\":\"Luxurious Apartment Near UC\",\"desc\":\"Elegant custom home offers unparalleled craftsmanship and exceptional amenities! This French inspired design is truly remarkable inside and out. Features include cabinets, counter tops, custom windows provide plenty of natural lighting, kitchen with (no) island (great for entertaining), gorgeous master suite, storage, plus STUNNING views of Kroger. Fantastic selfie mirror allows for great lighting! Extremely functional pull-out couch provided. Parking not provided. Animals under 50lbs allowed. Available anytime.\",\"loc\":\"2508 Auburn Ave Cincinnati, OH 45219\",\"base_price\":\"400\",\"add_price\":\"Utilities\",\"creator_uid\":\"56\",\"num_pictures\":\"5\",\"created\":\"2019-07-25 18:17:52\",\"modified\":\"2019-07-25 18:17:52\",\"creator_fname\":\"JT\",\"creator_lname\":\"Salisbury\",\"creator_email\":\"crazyscouter1@gmail.com\",\"hidden\":\"0\",\"saved\":\"0\"images\":[\"0.jpg\",\"1.jpg\",\"2.jpg\",\"3.jpg\",\"4.jpeg\"]}"
+        val coolKidTestResult = gson.fromJson(coolKidTest, ListingData::class.java)
+
+        val test2 = "{\"images\":\"0.jpg\"}"
+        val testResult2 = gson.fromJson(test2, m) as Map<String, Any>
+
+        val test3 = "{\"images\":[\"0.jpg\",\"1.jpg\",\"2.jpg\",\"3.jpg\",\"4.jpeg\"]}"
+        val testResult3 = gson.fromJson(test3, m) as Map<String, Any>
+
+        val test4 = "{\"hidden\":\"0\",\"saved\":\"0\",\"images\":[\"0.jpg\",\"1.jpg\",\"2.jpg\",\"3.jpg\",\"4.jpeg\"]}"
+        val testResult4 = gson.fromJson(test2, m) as Map<String, Any>*/
+
+        // Get listings
+        val listings = mutableListOf<Map<String, Any>>()
+        var listingCount = 0
+        pos = pos+12
+        while(pos < string.length-2) {
+            var char = string[pos].toString()
+            string2+=char
+            pos++
+            if(char == "}" && string2.length > 30) {
+                listings[listingCount] = gson.fromJson(string2, n) as Map<String, Any>
+                listingCount++
+                pos++
+                string2 = ""
+            }
+        }
+
+        //val subletList= gson.fromJson(string2, n) as List<Map<String, Any>>
+        return Pair(pages, listings)
     }
 }

@@ -105,11 +105,14 @@
         </View>
 
         <ListView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/listings"
+                android:id="@+id/sublet_list_view"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
                 android:dividerHeight="1dp"
                 android:divider="@color/light_grey"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/search_bar">
 
         </ListView>
