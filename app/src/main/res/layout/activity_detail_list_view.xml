@@ -12,7 +12,8 @@
 
     <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@color/white">
 
         <android.support.v7.widget.Toolbar
 
@@ -64,73 +65,88 @@
                 app:layout_constraintHorizontal_bias="0.496"
                 app:layout_constraintTop_toBottomOf="@+id/title" tools:layout_conversion_absoluteHeight="0dp"
                 tools:layout_conversion_absoluteWidth="0dp" tools:layout_conversion_wrapWidth="63"
-                tools:layout_conversion_wrapHeight="63" android:layout_marginTop="28dp"/>
+                tools:layout_conversion_wrapHeight="63" android:layout_marginTop="20dp"/>
         <TextView
                 android:text="Title"
-                android:layout_width="360dp"
-                android:layout_height="42dp"
+                android:fontFamily="@font/open_sans"
+                android:textColor="@color/colorPrimary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:singleLine="false"
                 android:id="@+id/title" android:textSize="30sp"
                 app:layout_constraintTop_toBottomOf="@id/detail_toolbar"
-                android:textAlignment="center" app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="24dp" android:layout_marginTop="28dp"/>
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="176dp" android:layout_marginTop="20dp"
+        />
         <TextView
-                android:text="TextView"
-                android:layout_width="360dp"
+                android:text="Description:"
+                android:fontFamily="@font/open_sans"
+                android:textColor="@color/colorPrimary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:singleLine="false"
+                android:id="@+id/desc_title"
+                android:layout_marginTop="12dp"
+                app:layout_constraintTop_toBottomOf="@+id/loc" android:textAlignment="textStart"
+                android:layout_marginStart="20dp" app:layout_constraintStart_toStartOf="parent"
+                android:textSize="18sp"/>
+        <TextView
+                android:text="Price"
+                android:fontFamily="@font/open_sans"
+                android:textColor="@color/colorPrimary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/price"
+                android:textSize="18sp" android:layout_marginTop="24dp"
+                app:layout_constraintTop_toBottomOf="@+id/images" android:layout_marginStart="20dp"
+                app:layout_constraintStart_toStartOf="parent"/>
+        <TextView
+                android:text="Creator"
+                android:textColor="@color/colorPrimary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/creator" android:layout_marginTop="12dp"
+                app:layout_constraintTop_toBottomOf="@+id/price" app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="20dp"
+                android:textSize="18sp"/>
+        <TextView
+                android:text="Location"
+                android:fontFamily="@font/open_sans"
+                android:textColor="@color/colorPrimary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/loc" app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="20dp"
+                app:layout_constraintTop_toBottomOf="@+id/creator" android:layout_marginTop="12dp"
+                android:textSize="18sp"/>
+        <ImageButton
+                android:layout_width="51dp"
+                android:background="@android:color/transparent"
+                android:scaleType="fitCenter"
+                android:layout_height="77dp" app:srcCompat="@drawable/ic_chevron_right_black_24dp"
+                android:id="@+id/arrow_right"
+                android:layout_marginTop="96dp"
+                app:layout_constraintTop_toBottomOf="@+id/title" app:layout_constraintStart_toEndOf="@+id/images"
+        />
+        <ImageButton
+                android:layout_width="51dp"
+                android:background="@android:color/transparent"
+                android:scaleType="fitCenter"
+                android:layout_height="77dp" app:srcCompat="@drawable/ic_chevron_left_black_24dp"
+                android:id="@+id/arrow_left"
+                app:layout_constraintEnd_toStartOf="@+id/images" android:layout_marginTop="96dp"
+                app:layout_constraintTop_toBottomOf="@+id/title"/>
+        <TextView
+                android:text="Description"
+                android:fontFamily="@font/open_sans"
+                android:textColor="@color/colorPrimary"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:singleLine="false"
                 android:id="@+id/desc"
-                android:layout_marginTop="28dp"
-                app:layout_constraintTop_toBottomOf="@+id/images" android:textAlignment="textStart"
-                android:layout_marginStart="8dp" app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginEnd="8dp" app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.272" android:textSize="18sp"/>
-        <TextView
-                android:text="TextView"
-                android:layout_width="360dp"
-                android:layout_height="wrap_content" android:id="@+id/price"
-                app:layout_constraintTop_toBottomOf="@+id/desc"
-                android:layout_marginTop="16dp" app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="8dp" app:layout_constraintHorizontal_bias="0.272"
-                android:textSize="18sp"/>
-        <TextView
-                android:text="TextView"
-                android:layout_width="360dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/creator" android:layout_marginTop="16dp"
-                app:layout_constraintTop_toBottomOf="@+id/price" app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="8dp" app:layout_constraintHorizontal_bias="0.272"
-                android:textSize="18sp"/>
-        <TextView
-                android:text="TextView"
-                android:layout_width="360dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/loc" app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="8dp" app:layout_constraintHorizontal_bias="0.272"
-                app:layout_constraintTop_toBottomOf="@+id/creator" android:layout_marginTop="16dp"
-                android:textSize="18sp"/>
-        <ImageButton
-                android:layout_width="51dp"
-                android:rotation="-90"
-                android:background="@android:color/transparent"
-                android:scaleType="fitCenter"
-                android:layout_height="77dp" app:srcCompat="@android:drawable/arrow_down_float"
-                android:id="@+id/arrow_right"
-                android:layout_marginTop="112dp"
-                app:layout_constraintTop_toBottomOf="@+id/title" app:layout_constraintStart_toEndOf="@+id/images"
-                android:layout_marginStart="8dp"/>
-        <ImageButton
-                android:layout_width="51dp"
-                android:rotation="90"
-                android:background="@android:color/transparent"
-                android:scaleType="fitCenter"
-                android:layout_height="77dp" app:srcCompat="@android:drawable/arrow_down_float"
-                android:id="@+id/arrow_left" android:layout_marginEnd="8dp"
-                app:layout_constraintEnd_toStartOf="@+id/images" android:layout_marginTop="112dp"
-                app:layout_constraintTop_toBottomOf="@+id/title"/>
+                android:textAlignment="textStart"
+                android:layout_marginStart="20dp" app:layout_constraintStart_toStartOf="parent"
+                android:textSize="16sp"
+                app:layout_constraintTop_toBottomOf="@+id/desc_title"/>
 
     </android.support.constraint.ConstraintLayout>
 

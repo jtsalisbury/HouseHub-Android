@@ -77,11 +77,6 @@ class DetailListView : AppCompatActivity() {
                     val intent = Intent(this, LoginActivity::class.java)
                     startActivity(intent)
                 }
-                /*R.id.action_new ->{
-                    // Multiline action
-                    toast("New clicked")
-                }*/
-
             }
             // Close the drawer
             detail_drawer_layout.closeDrawer(GravityCompat.START)
