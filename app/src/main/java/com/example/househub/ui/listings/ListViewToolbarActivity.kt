@@ -1,6 +1,5 @@
 package com.example.househub.ui.listings
 
-import android.content.Context
 import android.support.design.widget.NavigationView
 import android.content.Intent
 import android.os.Bundle
@@ -16,10 +15,7 @@ import com.example.househub.data.model.Listing
 import com.example.househub.ui.account.AccountInfoActivity
 import com.example.househub.ui.detailListing.DetailListView
 import com.example.househub.ui.login.LoginActivity
-import kotlinx.android.synthetic.main.activity_detail_list_view.*
 import kotlinx.android.synthetic.main.activity_listview_toolbar.*
-import kotlinx.android.synthetic.main.activity_login.*
-import kotlinx.android.synthetic.main.toolbar.*
 import kotlinx.android.synthetic.main.toolbar.drawer_layout
 import kotlinx.android.synthetic.main.toolbar.navigation_view
 import kotlinx.android.synthetic.main.toolbar.toolbar
@@ -28,7 +24,7 @@ import kotlinx.coroutines.*
 open class ListViewToolbarActivity : AppCompatActivity() {
 
     private lateinit var listings: List<Listing>
-    private var priceAscending = true
+    private var priceDescending = true
     private var dateAscending = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -108,6 +104,10 @@ open class ListViewToolbarActivity : AppCompatActivity() {
         // Create Listeners
         search_listings_button.setOnClickListener {
             getListings()
+            pricingArrow.setImageResource(0)
+            dateArrow.setImageResource(0)
+            priceDescending = true
+            dateAscending = true
         }
 
         clear_button.setOnClickListener {
@@ -116,16 +116,28 @@ open class ListViewToolbarActivity : AppCompatActivity() {
             maxPriceText.text.clear()
             my_listings_button.isChecked = false
             saved_listings_button.isChecked = false
+            pricingArrow.setImageResource(0)
+            dateArrow.setImageResource(0)
+            priceDescending = true
+            dateAscending = true
         }
 
+        pricingArrow.bringToFront()
+
         pricing_sort_button.setOnClickListener {
+            dateArrow.setImageResource(0)
+            dateAscending = true
+
             var sortedList = listings.sortedWith(compareBy{ it.base_price })
-            if(priceAscending) {
+            if(priceDescending) {
                 sortedList = sortedList.reversed()
-                priceAscending = false
+                priceDescending = false
+                pricingArrow.setImageResource(R.drawable.downarrow)
+
             }
             else {
-                priceAscending = true
+                priceDescending = true
+                pricingArrow.setImageResource(R.drawable.uparrow)
             }
 
             val listView = findViewById<ListView>(R.id.sublet_list_view)
@@ -139,13 +151,18 @@ open class ListViewToolbarActivity : AppCompatActivity() {
         }
 
         created_date_sort_button.setOnClickListener {
+            pricingArrow.setImageResource(0)
+            priceDescending = true
+
             var sortedList = listings.sortedWith(compareBy{ it.created })
             if(dateAscending) {
                 sortedList = sortedList.reversed()
                 dateAscending = false
+                dateArrow.setImageResource(R.drawable.downarrow)
             }
             else {
                 dateAscending = true
+                dateArrow.setImageResource(R.drawable.uparrow)
             }
 
             val listView = findViewById<ListView>(R.id.sublet_list_view)
