@@ -91,27 +91,6 @@
                     android:layout_marginTop="12dp"
                     app:layout_constraintEnd_toEndOf="parent"/>
 
-            <android.support.design.button.MaterialButton
-                    android:text="Search Listings"
-                    android:textColor="@color/colorWhite"
-                    android:background="@color/colorPrimaryDark"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/search_listings_button"
-                    android:fontFamily="@font/open_sans"
-                    android:textAllCaps="false"
-                    android:textSize="14sp"
-                    android:backgroundTint="@color/colorPrimaryDark"
-                    app:strokeWidth="2dp"
-                    app:strokeColor="@color/colorWhite"
-                    android:shadowColor="@color/colorPrimary"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginTop="4dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/my_listings_button"
-                    app:layout_constraintStart_toStartOf="parent"/>
-
             <EditText
                     android:layout_width="160dp"
                     android:layout_height="wrap_content"
@@ -146,34 +125,36 @@
                     android:layout_marginTop="12dp"
                     app:layout_constraintEnd_toEndOf="parent"/>
 
-            <android.support.design.button.MaterialButton
+            <CheckBox
                     android:text="My Listings"
-                    android:textColor="@color/colorWhite"
-                    android:background="@color/colorPrimaryDark"
+                    android:textColor="@color/black"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/my_listings_button" android:fontFamily="@font/open_sans"
-                    android:textAllCaps="false" android:textSize="14sp" android:backgroundTint="@color/colorPrimaryDark"
-                    app:strokeWidth="2dp" app:strokeColor="@color/colorWhite"
-                    android:shadowColor="@color/colorPrimary" android:layout_marginStart="8dp"
+                    android:textAllCaps="false"
+                    android:textSize="14sp"
+                    android:shadowColor="@color/colorPrimary"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="7dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/minPriceText"/>
 
-            <android.support.design.button.MaterialButton
+            <CheckBox
                     android:text="Saved Listings"
-                    android:textColor="@color/colorWhite"
-                    android:background="@color/colorPrimaryDark"
+                    android:textColor="@color/black"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/saved_listings_button"
-                    app:layout_constraintBottom_toBottomOf="parent" android:fontFamily="@font/open_sans"
-                    android:textAllCaps="false" android:textSize="14sp" android:backgroundTint="@color/colorPrimaryDark"
-                    app:strokeWidth="2dp" app:strokeColor="@color/colorWhite"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:fontFamily="@font/open_sans"
+                    android:textAllCaps="false"
+                    android:textSize="14sp"
                     android:shadowColor="@color/colorPrimary"
                     app:layout_constraintTop_toBottomOf="@+id/minPriceText"
                     app:layout_constraintStart_toEndOf="@+id/my_listings_button"
                     app:layout_constraintVertical_bias="0.0" app:layout_constraintEnd_toStartOf="@+id/clear_button"
                     android:layout_marginStart="8dp"
+                    android:layout_marginTop="7dp"
                     android:layout_marginEnd="8dp"/>
 
             <android.support.design.button.MaterialButton
@@ -187,6 +168,63 @@
                     app:strokeWidth="2dp" app:strokeColor="@color/colorWhite"
                     android:shadowColor="@color/colorPrimary" android:layout_marginStart="8dp"
                     app:layout_constraintTop_toBottomOf="@+id/minPriceText" android:layout_marginEnd="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+            <android.support.design.button.MaterialButton
+                    android:text="Search Listings"
+                    android:textColor="@color/colorWhite"
+                    android:background="@color/colorPrimaryDark"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/search_listings_button"
+                    android:fontFamily="@font/open_sans"
+                    android:textAllCaps="false"
+                    android:textSize="14sp"
+                    android:backgroundTint="@color/colorPrimaryDark"
+                    app:strokeWidth="2dp"
+                    app:strokeColor="@color/colorWhite"
+                    android:shadowColor="@color/colorPrimary"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginTop="4dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/clear_button"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
+            <android.support.design.button.MaterialButton
+                    android:text="Price"
+                    android:textColor="@color/colorWhite"
+                    android:background="@color/colorPrimaryDark"
+                    android:layout_width="160dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/pricing_sort_button"
+                    android:fontFamily="@font/open_sans"
+                    android:textAllCaps="false"
+                    android:textSize="14sp"
+                    android:backgroundTint="@color/colorPrimaryDark"
+                    app:strokeWidth="2dp"
+                    app:strokeColor="@color/colorWhite"
+                    android:shadowColor="@color/colorPrimary"
+                    android:layout_marginStart="8dp"
+                    app:layout_constraintTop_toBottomOf="@id/search_listings_button"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
+            <android.support.design.button.MaterialButton
+                    android:text="Created Date"
+                    android:textColor="@color/colorWhite"
+                    android:background="@color/colorPrimaryDark"
+                    android:layout_width="160dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/created_date_sort_button"
+                    android:fontFamily="@font/open_sans"
+                    android:textAllCaps="false"
+                    android:textSize="14sp"
+                    android:backgroundTint="@color/colorPrimaryDark"
+                    app:strokeWidth="2dp"
+                    app:strokeColor="@color/colorWhite"
+                    android:shadowColor="@color/colorPrimary"
+                    app:layout_constraintTop_toBottomOf="@id/search_listings_button"
+                    android:layout_marginEnd="8dp"
                     app:layout_constraintEnd_toEndOf="parent"/>
 
         </android.support.constraint.ConstraintLayout>

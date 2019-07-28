@@ -16,7 +16,9 @@ import com.example.househub.data.model.Listing
 import com.example.househub.ui.account.AccountInfoActivity
 import com.example.househub.ui.detailListing.DetailListView
 import com.example.househub.ui.login.LoginActivity
+import kotlinx.android.synthetic.main.activity_detail_list_view.*
 import kotlinx.android.synthetic.main.activity_listview_toolbar.*
+import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.toolbar.*
 import kotlinx.android.synthetic.main.toolbar.drawer_layout
 import kotlinx.android.synthetic.main.toolbar.navigation_view
@@ -26,6 +28,8 @@ import kotlinx.coroutines.*
 open class ListViewToolbarActivity : AppCompatActivity() {
 
     private lateinit var listings: List<Listing>
+    private var priceAscending = true
+    private var dateAscending = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -77,11 +81,106 @@ open class ListViewToolbarActivity : AppCompatActivity() {
             true
         }
 
+        getListings()
+
+        val context = this
+        sublet_list_view.setOnItemClickListener { _, _, position, _ ->
+            val selectedListing = listings[position]
+            val intent = Intent(context, DetailListView::class.java)
+            intent.putExtra("additionalPrice", selectedListing.add_price)
+            intent.putExtra("basePrice", selectedListing.base_price)
+            intent.putExtra("dateCreated", selectedListing.created)
+            intent.putExtra("creatorEmail", selectedListing.creator_email)
+            intent.putExtra("creatorFirstName", selectedListing.creator_fname)
+            intent.putExtra("creatorLastName", selectedListing.creator_lname)
+            intent.putExtra("creatorUserId", selectedListing.creator_uid)
+            intent.putExtra("description", selectedListing.desc)
+            intent.putExtra("isHidden", selectedListing.hidden)
+            intent.putExtra("location", selectedListing.loc)
+            intent.putExtra("dateModified", selectedListing.modified)
+            intent.putExtra("numberOfPictures", selectedListing.num_pictures)
+            intent.putExtra("propertyId", selectedListing.pid)
+            intent.putExtra("title", selectedListing.title)
+            startActivity(intent)
+        }
+
+
+        // Create Listeners
+        search_listings_button.setOnClickListener {
+            getListings()
+        }
+
+        clear_button.setOnClickListener {
+            searchListings.text.clear()
+            minPriceText.text.clear()
+            maxPriceText.text.clear()
+            my_listings_button.isChecked = false
+            saved_listings_button.isChecked = false
+        }
+
+        pricing_sort_button.setOnClickListener {
+            var sortedList = listings.sortedWith(compareBy{ it.base_price })
+            if(priceAscending) {
+                sortedList = sortedList.reversed()
+                priceAscending = false
+            }
+            else {
+                priceAscending = true
+            }
+
+            val listView = findViewById<ListView>(R.id.sublet_list_view)
+            val listItems = arrayOfNulls<String>(sortedList.size)
+            for (i in 0 until sortedList.size) {
+                val listing = sortedList[i]
+                listItems[i] = listing.title
+            }
+            val adapter = ArrayAdapter(baseContext, android.R.layout.simple_list_item_1, listItems)
+            listView.adapter = adapter
+        }
+
+        created_date_sort_button.setOnClickListener {
+            var sortedList = listings.sortedWith(compareBy{ it.created })
+            if(dateAscending) {
+                sortedList = sortedList.reversed()
+                dateAscending = false
+            }
+            else {
+                dateAscending = true
+            }
+
+            val listView = findViewById<ListView>(R.id.sublet_list_view)
+            val listItems = arrayOfNulls<String>(sortedList.size)
+            for (i in 0 until sortedList.size) {
+                val listing = sortedList[i]
+                listItems[i] = listing.title
+            }
+            val adapter = ArrayAdapter(baseContext, android.R.layout.simple_list_item_1, listItems)
+            listView.adapter = adapter
+        }
+    }
+
+    private fun getListings() {
+
         val jwt = JWT()
-        val payload = mapOf("requesterid" to LoginActivity.userIdGlobal)
+        //var payload = mapOf("requesterid" to LoginActivity.userIdGlobal) as MutableMap
+        //if(my_listings_button.isChecked) payload.put("uid" to LoginActivity.userIdGlobal)
+        val mutablePayload =
+            mapOf("uid" to LoginActivity.userIdGlobal.toString(),
+            "saved" to saved_listings_button.isChecked.toString(),
+            "price_min" to minPriceText.text.toString(),
+            "price_max" to maxPriceText.text.toString(),
+            "search_criteria" to searchListings.text.toString(),
+            "requesterid" to LoginActivity.userIdGlobal.toString()) as MutableMap
+
+        if(!my_listings_button.isChecked && !saved_listings_button.isChecked) mutablePayload.remove("uid")
+        if(!saved_listings_button.isChecked) mutablePayload.remove("saved")
+        if(minPriceText.text.isNullOrEmpty()) mutablePayload.remove("price_min")
+        if(maxPriceText.text.isNullOrEmpty()) mutablePayload.remove("price_max")
+        if(searchListings.text.isNullOrEmpty()) mutablePayload.remove("search_criteria")
+
+        val payload = mutablePayload as Map<String, Any>
 
         val url = "http://u747950311.hostingerapp.com/househub/api/listings/retrieve.php"
-        //var success: Map<String, Any>? = null
         var success = ""
         var fail = ""
 
@@ -113,27 +212,6 @@ open class ListViewToolbarActivity : AppCompatActivity() {
             }
             val adapter = ArrayAdapter(baseContext, android.R.layout.simple_list_item_1, listItems)
             listView.adapter = adapter
-        }
-
-        val context = this
-        sublet_list_view.setOnItemClickListener { _, _, position, _ ->
-            val selectedListing = listings[position]
-            val intent = Intent(context, DetailListView::class.java)
-            intent.putExtra("additionalPrice", selectedListing.add_price)
-            intent.putExtra("basePrice", selectedListing.base_price)
-            intent.putExtra("dateCreated", selectedListing.created)
-            intent.putExtra("creatorEmail", selectedListing.creator_email)
-            intent.putExtra("creatorFirstName", selectedListing.creator_fname)
-            intent.putExtra("creatorLastName", selectedListing.creator_lname)
-            intent.putExtra("creatorUserId", selectedListing.creator_uid)
-            intent.putExtra("description", selectedListing.desc)
-            intent.putExtra("isHidden", selectedListing.hidden)
-            intent.putExtra("location", selectedListing.loc)
-            intent.putExtra("dateModified", selectedListing.modified)
-            intent.putExtra("numberOfPictures", selectedListing.num_pictures)
-            intent.putExtra("propertyId", selectedListing.pid)
-            intent.putExtra("title", selectedListing.title)
-            startActivity(intent)
         }
     }
 }
