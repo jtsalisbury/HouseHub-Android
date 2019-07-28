@@ -29,7 +29,7 @@ class DetailListView : AppCompatActivity() {
         setSupportActionBar(findViewById(R.id.detail_toolbar))
 
         val num_pictures:Int = intent.getStringExtra("numberOfPictures").toInt()
-        val user_id:String = intent.getStringExtra("creatorUserId")
+        val user_id:String = intent.getStringExtra("propertyId")
         val title:String = intent.getStringExtra("title")
         val base_price:String = intent.getStringExtra("basePrice")
         val additional_price:String = intent.getStringExtra("additionalPrice")
@@ -40,6 +40,7 @@ class DetailListView : AppCompatActivity() {
 
         var picture_id = 0
         var url = "http://u747950311.hostingerapp.com/househub/api/images"
+        var temp_url = ""
 
         Picasso.get().load(url + "/" + user_id + "/0.jpg").into(images)
 
@@ -97,14 +98,14 @@ class DetailListView : AppCompatActivity() {
             if(left_right == false && picture_id > 0){
                 //move to previous picture
                 picture_id -= 1
-                url = url + "/" + user_id + "/" + picture_id.toString() + ".jpg"
-                Picasso.get().load(url).into(images)
+                temp_url = url + "/" + user_id + "/" + picture_id.toString() + ".jpg"
+                Picasso.get().load(temp_url).into(images)
             }
-            else if(left_right == true && picture_id < (num_pictures + 1)){
+            else if(left_right == true && picture_id < (num_pictures - 1)){
                 //move to next picture
                 picture_id += 1
-                url = url + "/" + user_id + "/" + picture_id.toString() + ".jpg"
-                Picasso.get().load(url).into(images)
+                temp_url = url + "/" + user_id + "/" + picture_id.toString() + ".jpg"
+                Picasso.get().load(temp_url).into(images)
             }
             else{
                 //do nothing
