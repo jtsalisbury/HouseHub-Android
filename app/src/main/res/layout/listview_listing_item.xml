@@ -13,7 +13,8 @@
                 android:id="@+id/listingImage"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"/>

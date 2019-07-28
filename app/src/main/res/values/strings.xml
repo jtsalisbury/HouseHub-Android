@@ -16,6 +16,7 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
+    <string name="register_here">Don\'t have an account? Register here.</string>
 
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
@@ -120,5 +121,6 @@
     </string>
     <string name="title_activity_account_info">AccountInfoActivity</string>
     <string name="title_activity_detail_list_view">DetailListView</string>
+    <string name="title_activity_register">RegisterActivity</string>
 
 </resources>

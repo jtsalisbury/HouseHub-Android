@@ -16,10 +16,9 @@ import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
 import com.example.househub.R
-import com.example.househub.data.model.LoggedInUser
-import com.example.househub.ui.account.AccountInfoActivity
-import com.example.househub.ui.detailListing.DetailListView
 import com.example.househub.ui.listings.ListViewToolbarActivity
+import com.example.househub.ui.register.RegisterActivity
+import kotlinx.android.synthetic.main.activity_login.*
 
 
 class LoginActivity : AppCompatActivity() {
@@ -128,6 +127,11 @@ class LoginActivity : AppCompatActivity() {
                     }
                 }).start()
             }
+        }
+
+        registerHereButton.setOnClickListener {
+            val intent = Intent(this, RegisterActivity::class.java)
+            startActivity(intent)
         }
     }
 
