@@ -28,11 +28,21 @@ class DetailListView : AppCompatActivity() {
         setContentView(R.layout.activity_detail_list_view)
         setSupportActionBar(findViewById(R.id.detail_toolbar))
 
-        val test = intent.getStringExtra("title")
-//        val num_pictures = getIntent.getIntExtra()
-//        val user_id = getIntent.getIntExtra()
+        val num_pictures:Int = intent.getStringExtra("numberOfPictures").toInt()
+        val user_id:String = intent.getStringExtra("propertyId")
+        val title:String = intent.getStringExtra("title")
+        val base_price:String = intent.getStringExtra("basePrice")
+        val additional_price:String = intent.getStringExtra("additionalPrice")
+        val creator_fname:String = intent.getStringExtra("creatorFirstName")
+        val creator_lname:String = intent.getStringExtra("creatorLastName")
+        val location:String = intent.getStringExtra("location")
+        val description:String = intent.getStringExtra("description")
+
         var picture_id = 0
         var url = "http://u747950311.hostingerapp.com/househub/api/images"
+        var temp_url = ""
+
+        Picasso.get().load(url + "/" + user_id + "/0.jpg").into(images)
 
         findViewById<NavigationView>(R.id.detail_navigation_view).setItemIconTintList(null)
 
@@ -84,42 +94,47 @@ class DetailListView : AppCompatActivity() {
             true
         }
 
-//        fun setPicture(left_right: Boolean) { //left = false, right = true
-//            if(left_right == false && picture_id > 0){
-//                //move to previous picture
-//                picture_id -= 1
-//                url = url + "/" + user_id.toString() + "/" + picture_id.toString() + ".jpg"
-//                Picasso.get().load(url).into(images)
-//            }
-//            else if(left_right == true && picture_id < (num_pictures + 1)){
-//                //move to next picture
-//                picture_id += 1
-//                url = url + "/" + user_id.toString() + "/" + picture_id.toString() + ".jpg"
-//                Picasso.get().load(url).into(images)
-//            }
-//            else{
-//                //do nothing
-//            }
-//        }
-//
-//        arrow_left.setOnClickListener{
-//            setPicture(false)
-//        }
-//
-//        arrow_right.setOnClickListener{
-//            setPicture(true)
-//        }
+        fun setPicture(left_right: Boolean) { //left = false, right = true
+            if(left_right == false && picture_id > 0){
+                //move to previous picture
+                picture_id -= 1
+                temp_url = url + "/" + user_id + "/" + picture_id.toString() + ".jpg"
+                Picasso.get().load(temp_url).into(images)
+            }
+            else if(left_right == true && picture_id < (num_pictures - 1)){
+                //move to next picture
+                picture_id += 1
+                temp_url = url + "/" + user_id + "/" + picture_id.toString() + ".jpg"
+                Picasso.get().load(temp_url).into(images)
+            }
+            else{
+                //do nothing
+            }
+        }
+
+        arrow_left.setOnClickListener{
+            setPicture(false)
+        }
+
+        arrow_right.setOnClickListener{
+            setPicture(true)
+        }
 
 
-//        val num_pictures_text: TextView = findViewById<TextView>(R.id.desc)
-//        num_pictures_text.text = "num_pictures = " + num_pictures.toString()
-//
-//        val user_id_text: TextView = findViewById<TextView>(R.id.price)
-//        user_id_text.text = "user_id = " + user_id.toString()
+        val title_view: TextView = findViewById(R.id.title)
+        title_view.text = title
 
-        Picasso.get().load("http://u747950311.hostingerapp.com/househub/api/images/1/0.jpg").into(images)
+        val price_view: TextView = findViewById(R.id.price)
+        price_view.text = base_price + " + " + additional_price
 
+        val creator_view: TextView = findViewById(R.id.creator)
+        creator_view.text = creator_fname + " " + creator_lname
 
+        val location_view: TextView = findViewById(R.id.location)
+        location_view.text = location
+
+        val description_view: TextView = findViewById(R.id.description)
+        description_view.text = description
     }
 
 }
