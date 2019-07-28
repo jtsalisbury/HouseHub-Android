@@ -14,6 +14,14 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+        <View
+                android:id="@+id/verticalDivider"
+                android:layout_width="1dp"
+                android:layout_height="fill_parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
         <android.support.v7.widget.Toolbar
 
                 android:layout_width="match_parent"
@@ -28,7 +36,6 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintTop_toBottomOf="parent"
                 app:layout_constraintHorizontal_bias="0.0" app:titleTextColor="@color/colorPrimary"/>
-
 
         <ImageView
                 android:layout_width="32dp"
@@ -58,41 +65,129 @@
 
         <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="wrap_content"
                 android:id="@+id/search_bar"
                 app:layout_constraintTop_toBottomOf="@+id/toolbar"
                 tools:layout_editor_absoluteX="-59dp">
 
+
+
             <EditText
-                    android:layout_width="191dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textFilter"
                     android:hint="Search Listings..."
                     android:textColor="@color/black"
                     android:textSize="18sp"
                     android:ems="10"
-                    android:id="@+id/editText"
+                    android:id="@+id/searchListings"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     android:textColorHint="@color/light_grey"
                     android:backgroundTint="@null"
                     android:fontFamily="@font/open_sans"
-                    android:layout_marginLeft="20dp"
-                    android:background="@null" android:layout_marginTop="14dp" android:maxLength="18"/>
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginTop="12dp"
+                    app:layout_constraintEnd_toEndOf="parent"/>
 
             <android.support.design.button.MaterialButton
-                    android:text="View Listings"
+                    android:text="Search Listings"
+                    android:textColor="@color/colorWhite"
+                    android:background="@color/colorPrimaryDark"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/search_listings_button"
+                    android:fontFamily="@font/open_sans"
+                    android:textAllCaps="false"
+                    android:textSize="14sp"
+                    android:backgroundTint="@color/colorPrimaryDark"
+                    app:strokeWidth="2dp"
+                    app:strokeColor="@color/colorWhite"
+                    android:shadowColor="@color/colorPrimary"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginTop="4dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/my_listings_button"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
+            <EditText
+                    android:layout_width="160dp"
+                    android:layout_height="wrap_content"
+                    android:inputType="textFilter"
+                    android:hint="Minimum Price"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:ems="10"
+                    android:id="@+id/minPriceText"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/searchListings"
+                    android:textColorHint="@color/light_grey"
+                    android:backgroundTint="@null"
+                    android:fontFamily="@font/open_sans"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="12dp" />
+
+            <EditText
+                    android:layout_width="160dp"
+                    android:layout_height="wrap_content"
+                    android:inputType="textFilter"
+                    android:hint="Maximum Price"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:ems="10"
+                    android:id="@+id/maxPriceText"
+                    app:layout_constraintTop_toBottomOf="@id/searchListings"
+                    android:textColorHint="@color/light_grey"
+                    android:backgroundTint="@null"
+                    android:fontFamily="@font/open_sans"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginTop="12dp"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+            <android.support.design.button.MaterialButton
+                    android:text="My Listings"
                     android:textColor="@color/colorWhite"
                     android:background="@color/colorPrimaryDark"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/view_listings_button"
-                    app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="20dp"
-                    app:layout_constraintBottom_toBottomOf="parent" android:fontFamily="@font/open_sans"
-                    android:textAllCaps="false" android:textSize="16sp" android:backgroundTint="@color/colorPrimaryDark"
+                    android:id="@+id/my_listings_button" android:fontFamily="@font/open_sans"
+                    android:textAllCaps="false" android:textSize="14sp" android:backgroundTint="@color/colorPrimaryDark"
                     app:strokeWidth="2dp" app:strokeColor="@color/colorWhite"
-                    android:shadowColor="@color/colorPrimary"/>
+                    android:shadowColor="@color/colorPrimary" android:layout_marginStart="8dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/minPriceText"/>
 
+            <android.support.design.button.MaterialButton
+                    android:text="Saved Listings"
+                    android:textColor="@color/colorWhite"
+                    android:background="@color/colorPrimaryDark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/saved_listings_button"
+                    app:layout_constraintBottom_toBottomOf="parent" android:fontFamily="@font/open_sans"
+                    android:textAllCaps="false" android:textSize="14sp" android:backgroundTint="@color/colorPrimaryDark"
+                    app:strokeWidth="2dp" app:strokeColor="@color/colorWhite"
+                    android:shadowColor="@color/colorPrimary"
+                    app:layout_constraintTop_toBottomOf="@+id/minPriceText"
+                    app:layout_constraintStart_toEndOf="@+id/my_listings_button"
+                    app:layout_constraintVertical_bias="0.0" app:layout_constraintEnd_toStartOf="@+id/clear_button"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"/>
+
+            <android.support.design.button.MaterialButton
+                    android:text="Clear Search"
+                    android:textColor="@color/colorWhite"
+                    android:background="@color/colorPrimaryDark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/clear_button" android:fontFamily="@font/open_sans"
+                    android:textAllCaps="false" android:textSize="14sp" android:backgroundTint="@color/colorPrimaryDark"
+                    app:strokeWidth="2dp" app:strokeColor="@color/colorWhite"
+                    android:shadowColor="@color/colorPrimary" android:layout_marginStart="8dp"
+                    app:layout_constraintTop_toBottomOf="@+id/minPriceText" android:layout_marginEnd="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"/>
 
         </android.support.constraint.ConstraintLayout>
 
