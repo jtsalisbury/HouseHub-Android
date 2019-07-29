@@ -31,6 +31,7 @@ open class ListViewToolbarActivity : AppCompatActivity() {
     private lateinit var listings: List<Listing>
     private var priceDescending = true
     private var dateAscending = true
+    private var hasSearched = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -102,6 +103,13 @@ open class ListViewToolbarActivity : AppCompatActivity() {
             intent.putExtra("numberOfPictures", selectedListing.num_pictures)
             intent.putExtra("propertyId", selectedListing.pid)
             intent.putExtra("title", selectedListing.title)
+            if(!hasSearched) {
+                intent.putExtra("saved", selectedListing.saved)
+            }
+            else {
+                intent.putExtra("saved", "1")
+            }
+
             startActivity(intent)
         }
 
@@ -113,6 +121,7 @@ open class ListViewToolbarActivity : AppCompatActivity() {
             dateArrow.setImageResource(0)
             priceDescending = true
             dateAscending = true
+            hasSearched = saved_listings_button.isChecked
         }
 
         clear_button.setOnClickListener {
@@ -278,5 +287,10 @@ open class ListViewToolbarActivity : AppCompatActivity() {
 
             return rowView
         }
+    }
+
+    override fun onResume() {
+        getListings()
+        super.onResume()
     }
 }

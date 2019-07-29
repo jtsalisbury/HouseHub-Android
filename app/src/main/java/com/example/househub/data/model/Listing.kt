@@ -15,7 +15,8 @@ data class Listing(
     val creator_lname: String,
     val creator_email: String,
     val hidden: String,
-    val images: List<String>
+    val images: List<String>,
+    val saved: String
 )
 
 data class ListingPayload(
