@@ -230,6 +230,14 @@ open class ListViewToolbarActivity : AppCompatActivity() {
             val listView = findViewById<ListView>(R.id.sublet_list_view)
             val adapter = ListingAdapter(baseContext, listings)
             listView.adapter = adapter
+
+            if(listings.isEmpty()) {
+                Toast.makeText(
+                    applicationContext,
+                    "No listings match your search.",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
         }
     }
 
