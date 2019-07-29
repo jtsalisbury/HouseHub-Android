@@ -79,7 +79,7 @@
                         android:layout_width="51dp"
                         android:background="@android:color/transparent"
                         android:scaleType="fitCenter"
-                        android:layout_height="77dp" app:srcCompat="@drawable/ic_chevron_left_black_24dp"
+                        android:layout_height="77dp" app:srcCompat="@drawable/ic_chevron_left_blue_24dp"
                         android:id="@+id/arrow_left"
                         android:layout_marginTop="104dp"
                         app:layout_constraintTop_toBottomOf="@+id/title"
@@ -88,7 +88,7 @@
                         android:layout_width="51dp"
                         android:background="@android:color/transparent"
                         android:scaleType="fitCenter"
-                        android:layout_height="77dp" app:srcCompat="@drawable/ic_chevron_right_black_24dp"
+                        android:layout_height="77dp" app:srcCompat="@drawable/ic_chevron_right_blue_24dp"
                         android:id="@+id/arrow_right"
                         android:layout_marginTop="104dp"
                         app:layout_constraintTop_toBottomOf="@+id/title"
@@ -196,6 +196,12 @@
                         android:layout_marginTop="24dp"
                         app:layout_constraintTop_toBottomOf="@+id/images" android:layout_marginStart="20dp"
                         app:layout_constraintStart_toStartOf="parent"/>
+                <ImageView
+                        android:layout_width="31dp"
+                        android:layout_height="32dp" app:srcCompat="@drawable/heart_empty"
+                        android:id="@+id/imageView2" app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_marginEnd="20dp" android:layout_marginTop="24dp"
+                        app:layout_constraintTop_toBottomOf="@+id/images"/>
 
             </android.support.constraint.ConstraintLayout>
         </ScrollView>
