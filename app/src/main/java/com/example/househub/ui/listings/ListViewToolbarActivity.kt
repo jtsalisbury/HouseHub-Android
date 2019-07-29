@@ -146,12 +146,7 @@ open class ListViewToolbarActivity : AppCompatActivity() {
             }
 
             val listView = findViewById<ListView>(R.id.sublet_list_view)
-            val listItems = arrayOfNulls<String>(sortedList.size)
-            for (i in 0 until sortedList.size) {
-                val listing = sortedList[i]
-                listItems[i] = listing.title
-            }
-            val adapter = ArrayAdapter(baseContext, android.R.layout.simple_list_item_1, listItems)
+            val adapter = ListingAdapter(baseContext, sortedList)
             listView.adapter = adapter
         }
 
@@ -171,12 +166,7 @@ open class ListViewToolbarActivity : AppCompatActivity() {
             }
 
             val listView = findViewById<ListView>(R.id.sublet_list_view)
-            val listItems = arrayOfNulls<String>(sortedList.size)
-            for (i in 0 until sortedList.size) {
-                val listing = sortedList[i]
-                listItems[i] = listing.title
-            }
-            val adapter = ArrayAdapter(baseContext, android.R.layout.simple_list_item_1, listItems)
+            val adapter = ListingAdapter(baseContext, sortedList)
             listView.adapter = adapter
         }
     }
@@ -227,11 +217,6 @@ open class ListViewToolbarActivity : AppCompatActivity() {
                 delay(10)
             }
             val listView = findViewById<ListView>(R.id.sublet_list_view)
-            val listItems = arrayOfNulls<String>(listings.size)
-            for (i in 0 until listings.size) {
-                val listing = listings[i]
-                listItems[i] = listing.title
-            }
             val adapter = ListingAdapter(baseContext, listings)
             listView.adapter = adapter
         }

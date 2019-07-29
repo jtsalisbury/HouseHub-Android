@@ -49,7 +49,7 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
         if (!isEmailValid(email)) {
             _loginForm.value = LoginFormState(emailError = R.string.invalid_email)
         } else if (!isPasswordValid(password)) {
-            _loginForm.value = LoginFormState(passwordError = R.string.invalid_password)
+            //_loginForm.value = LoginFormState(passwordError = R.string.invalid_password)
         } else {
             _loginForm.value = LoginFormState(isDataValid = true)
         }
