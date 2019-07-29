@@ -133,20 +133,21 @@ open class ListViewToolbarActivity : AppCompatActivity() {
             dateArrow.setImageResource(0)
             dateAscending = true
 
-            var sortedList = listings.sortedWith(compareBy{ it.base_price })
+            val sortedList = listings.sortedWith(compareBy{ it.base_price })
             if(priceDescending) {
-                sortedList = sortedList.reversed()
+                listings = sortedList.reversed()
                 priceDescending = false
                 pricingArrow.setImageResource(R.drawable.downarrow)
 
             }
             else {
+                listings = sortedList
                 priceDescending = true
                 pricingArrow.setImageResource(R.drawable.uparrow)
             }
 
             val listView = findViewById<ListView>(R.id.sublet_list_view)
-            val adapter = ListingAdapter(baseContext, sortedList)
+            val adapter = ListingAdapter(baseContext, listings)
             listView.adapter = adapter
         }
 
@@ -154,19 +155,20 @@ open class ListViewToolbarActivity : AppCompatActivity() {
             pricingArrow.setImageResource(0)
             priceDescending = true
 
-            var sortedList = listings.sortedWith(compareBy{ it.created })
+            val sortedList = listings.sortedWith(compareBy{ it.created })
             if(dateAscending) {
-                sortedList = sortedList.reversed()
+                listings = sortedList.reversed()
                 dateAscending = false
                 dateArrow.setImageResource(R.drawable.downarrow)
             }
             else {
+                listings = sortedList
                 dateAscending = true
                 dateArrow.setImageResource(R.drawable.uparrow)
             }
 
             val listView = findViewById<ListView>(R.id.sublet_list_view)
-            val adapter = ListingAdapter(baseContext, sortedList)
+            val adapter = ListingAdapter(baseContext, listings)
             listView.adapter = adapter
         }
     }
