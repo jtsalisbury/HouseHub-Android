@@ -134,6 +134,7 @@ open class ListViewToolbarActivity : AppCompatActivity() {
             dateArrow.setImageResource(0)
             priceDescending = true
             dateAscending = true
+            getListings()
         }
 
         pricingArrow.bringToFront()
