@@ -1,7 +1,6 @@
 package com.example.househub.ui.detailListing
 
 import android.content.Intent
-import android.opengl.Visibility
 import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
@@ -16,16 +15,12 @@ import com.example.househub.R
 import com.example.househub.ui.account.AccountInfoActivity
 import com.example.househub.ui.listings.ListViewToolbarActivity
 import com.example.househub.ui.login.LoginActivity
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_detail_list_view.*
-import kotlinx.android.synthetic.main.toolbar.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
-import org.jetbrains.anko.toast
 
 class DetailListView : AppCompatActivity() {
 
@@ -81,17 +76,14 @@ class DetailListView : AppCompatActivity() {
         detail_navigation_view.setNavigationItemSelectedListener{
             when (it.itemId){
                 R.id.action_view_listings -> {
-                    toast("Cut clicked")
                     val intent = Intent(this, ListViewToolbarActivity::class.java)
                     startActivity(intent)
                 }
                 R.id.action_my_account -> {
-                    toast("Copy clicked")
                     val intent = Intent(this, AccountInfoActivity::class.java)
                     startActivity(intent)
                 }
                 R.id.action_logout -> {
-                    toast("Paste clicked")
                     val intent = Intent(this, LoginActivity::class.java)
                     startActivity(intent)
                 }
