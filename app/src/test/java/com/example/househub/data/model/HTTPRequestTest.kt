@@ -7,7 +7,7 @@ class HTTPRequestTest {
     @Test
     fun testHTTPRequest1() {
         val payload = mapOf("email" to "test@gmail.com", "pass" to "asdf")
-        val url = "http://u747950311.hostingerapp.com/househub/api/user/login.php"
+        val url = "http://www.jtsalisbury.tech/sites/househub/api/user/login.php"
 
         fun success(res: String) {
 

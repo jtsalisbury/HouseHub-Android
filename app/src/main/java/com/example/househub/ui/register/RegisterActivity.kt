@@ -48,7 +48,7 @@ class RegisterActivity : AppCompatActivity() {
                     "pass" to registerPassword.text.toString(),
                     "repass" to registerConfirmPassword.text.toString())
 
-                val url = "http://u747950311.hostingerapp.com/househub/api/user/create.php"
+                val url = "http://www.jtsalisbury.tech/sites/househub/api/user/create.php"
                 var success = ""
                 var fail = ""
 

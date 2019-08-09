@@ -41,7 +41,7 @@ class DetailListView : AppCompatActivity() {
         val saved:String = intent.getStringExtra("saved")
 
         var picture_id = 0
-        var url = "http://u747950311.hostingerapp.com/househub/api/images"
+        var url = "http://www.jtsalisbury.tech/sites/househub/api/images"
         var temp_url = ""
 
         Picasso.get().load(url + "/" + user_id + "/0.jpg").into(images)
@@ -119,7 +119,7 @@ class DetailListView : AppCompatActivity() {
             setPicture(true)
         }
 
-        val urlSave = "http://u747950311.hostingerapp.com/househub/api/listings/save.php"
+        val urlSave = "http://www.jtsalisbury.tech/sites/househub/api/listings/save.php"
 
         if(saved=="0") {
             emptyHeart.visibility = View.VISIBLE

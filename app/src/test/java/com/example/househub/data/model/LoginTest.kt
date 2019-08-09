@@ -18,7 +18,7 @@ class LoginTest {
         val jwt = JWT()
         val payload = mapOf("email" to email, "pass" to password)
 
-        val url = "http://u747950311.hostingerapp.com/househub/api/user/login.php"
+        val url = "http://www.jtsalisbury.tech/sites/househub/api/user/login.php"
         var success = ""
         var fail = ""
 

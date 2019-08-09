@@ -204,7 +204,7 @@ open class ListViewToolbarActivity : AppCompatActivity() {
 
         val payload = mutablePayload as Map<String, Any>
 
-        val url = "http://u747950311.hostingerapp.com/househub/api/listings/retrieve.php"
+        val url = "http://www.jtsalisbury.tech/sites/househub/api/listings/retrieve.php"
         var success = ""
         var fail = ""
 
@@ -285,7 +285,7 @@ open class ListViewToolbarActivity : AppCompatActivity() {
             // 1
             val listing = getItem(position) as Listing
 
-            val url = "http://u747950311.hostingerapp.com/househub/api/images"
+            val url = "http://www.jtsalisbury.tech/sites/househub/api/images"
             Picasso.get().load(url + "/" + listing.pid + "/0.jpg").into(thumbnailImageView)
 
             titleTextView.text = listing.title
